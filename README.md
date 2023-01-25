@@ -1,4 +1,4 @@
-# Ground-Fusion 
+# Ground-Fusion: A Low-cost SLAM System Robust to Corner Cases for Ground Vehicles
 
 codes and datasets will be made public upon paper acceptance!
 
