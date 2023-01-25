@@ -1,6 +1,7 @@
 # Ground-Fusion: A Low-cost SLAM System Robust to Corner Cases for Ground Vehicles
 
 codes and datasets will be made public upon paper acceptance!
+If there are any suggestions, we welcome the cooperation of interested friends to further develop new features to ensure that the algorithm can be deployed in real-world applications.
 
 ## Project Author: [Jie Yin](https://github.com/sjtuyinjie?tab=repositories) at 1195391308@qq.com 
 
@@ -18,3 +19,5 @@ We present Ground-Fusion: a low-cost SLAM system for ground vehicles featuring a
 * An adaptive sensor selection strategy is adopted to strengthen the robustness and accuracy of the system in various corner cases. 
 
 * We collect a novel multi-sensor SLAM dataset with rich sensory measurements in diverse scenarios, which will be made publicly available.
+
+
