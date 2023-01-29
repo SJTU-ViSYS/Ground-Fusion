@@ -1,8 +1,8 @@
 # Ground-Fusion: A Low-cost SLAM System Robust to Corner Cases for Ground Vehicles
 
 ## Notice: 
-### 1.codes and datasets will be made public upon paper acceptance! 
-### 2.We aim to build a low-cost multi-sensor fusion SLAM baseline system with a corresponding benchmark dataset. If there are any improving suggestions, we welcome the cooperation of interested friends to further develop new features to ensure that the algorithm can be deployed in real-world applications. 
+### 1.codes and datasets will be made public upon paper acceptance
+### 2.We aim to build a low-cost multi-sensor fusion SLAM baseline system with a corresponding benchmark dataset. If there are any improving suggestions, we welcome the cooperation to further develop new features to ensure that the algorithm can be deployed in real-world applications. We hope our system can go towards an ultimate solution of SLAM problem.
 ### 3.For any commercial or academic communications, contact Jie Yin at 1195391308@qq.com 
 
 ## Project Author: [Jie Yin](https://github.com/sjtuyinjie?tab=repositories) 
