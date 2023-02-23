@@ -4,7 +4,7 @@
 
 ## Notice: 
 ### 1.Codes and datasets will be made public upon paper acceptance
-### 2.We aim to build a low-cost multi-sensor fusion SLAM baseline system with a corresponding benchmark dataset. If there are any improving suggestions, we welcome the cooperation to further develop new features to ensure that the algorithm can be deployed in real-world applications. We hope our system can go towards an ultimate solution of SLAM problem.
+### 2.We aim to build a low-cost multi-sensor fusion SLAM baseline system with a corresponding benchmark dataset. If there are any improving suggestions, we welcome the cooperation to further develop new features to ensure that the algorithm can be deployed in real-world applications. 
 ### 3.For any commercial or academic communications, feel free to contact Jie Yin at 1195391308@qq.com 
 
 
