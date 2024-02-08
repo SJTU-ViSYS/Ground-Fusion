@@ -1,4 +1,4 @@
-# Ground-Fusion: A Low-cost Ground SLAM System Robust to Corner Cases
+# Ground-Fusion: A Low-cost Ground SLAM System Robust to Corner Cases (ICRA2024)
 ## Project Author: [Jie Yin](https://github.com/sjtuyinjie?tab=repositories) 
 
 #update
