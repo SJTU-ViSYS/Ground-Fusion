@@ -38,41 +38,64 @@ catkin_make
 
 
 ### 2.1 Ground-challenge dataset
-download at [Ground-challenge](https://github.com/sjtuyinjie/Ground-Challenge) and give a kind star
-[launch] open a terminal and type:
-~~~
-source devel/setup.bash
-roslaunch vins groundfusion.launch
-~~~
+download at [Ground-challenge](https://github.com/sjtuyinjie/Ground-Challenge) and give a kind star.
 
-[run localization] open another terminal:
 ~~~
+# [launch] open a terminal and type:
+source devel/setup.bash
+roslaunch vins groundfusion.launch\
+
+# [run localization] open another terminal:
 source devel/setup.bash
 rosrun vins vins_node src/Ground-Fusion/config/realsense/groundchallenge.yaml
-~~~
 
-[dense map]open third terminal:
-~~~
+# [dense map]open third terminal:
 source devel/setup.bash
 rosrun dense_map dense_map_node src/Ground-Fusion/config/realsense/groundchallenge.yaml
 ~~~
+
 
 ### 2.2 M2DGR-P dataset
-download at [M2DGR-P](https://github.com/sjtuyinjie/M2DGR-plus) and give a kind star
-[launch] open a terminal and type:
+download at [M2DGR-P](https://github.com/sjtuyinjie/M2DGR-plus) and give a kind star.
+
+
 ~~~
+# [launch] open a terminal and type:
 source devel/setup.bash
-roslaunch vins groundfusion.launch
+roslaunch vins groundfusion.launch\
+
+# [run localization] open another terminal:
+source devel/setup.bash
+rosrun vins vins_node src/Ground-Fusion/config/realsense/m2dgrp.yaml
+
+# [dense map]open third terminal:
+source devel/setup.bash
+rosrun dense_map dense_map_node src/Ground-Fusion/config/realsense/m2dgrp.yaml
 ~~~
 
-[run localization] open another terminal:
+
+
+
+## 3. Parameter configuration
+
+## 4. Acknowledgement
+Thanks support from NSFC(62073214) and Midea Group.
+
+## 5. License
+The source code of Ground-Fusion is released under GPLv3 license. Do not use this project for any commercial purpose unless permitted by authors. Yin Jie is still working on improving the system. For any technical issues, please contact at <1195391308@qq.com>.
+
+If you use this work in an academic work, please cite:
 ~~~
-source devel/setup.bash
-rosrun vins vins_node src/Ground-Fusion/config/realsense/groundchallenge.yaml
+@ARTICLE{9664374,
+  author={Yin, Jie and Li, Ang and Li, Tao and Yu, Wenxian and Zou, Danping},
+  journal={IEEE Robotics and Automation Letters}, 
+  title={M2DGR: A Multi-sensor and Multi-scenario SLAM Dataset for Ground Robots}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={1-1},
+  doi={10.1109/LRA.2021.3138527}}
 ~~~
 
-[dense map]open third terminal:
-~~~
-source devel/setup.bash
-rosrun dense_map dense_map_node src/Ground-Fusion/config/realsense/groundchallenge.yaml
-~~~
+
+
