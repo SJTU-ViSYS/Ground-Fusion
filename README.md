@@ -24,7 +24,7 @@ This package requires [OpenCV3](https://github.com/opencv/opencv) and some featu
 This package requires [Eigen 3.3.7](), [Ceres 1.14](https://ceres-solver.googlesource.com/ceres-solver) and [PCL 1.17](https://github.com/PointCloudLibrary/pcl).
 
 ### 1.4 Gnss_comm
-This package also requires [gnss_comm](https://github.com/HKUST-Aerial-Robotics/gnss_comm) for ROS message definitions and some utility functions. Follow [those instructions](https://github.com/HKUST-Aerial-Robotics/gnss_comm#2-build-gnss_comm-library) to build the *gnss_comm* package.
+This package also requires [gnss_comm](https://github.com/HKUST-Aerial-Robotics/gnss_comm) for ROS message definitions and some utility functions.
 
 ### 1.5 Build
 ~~~
