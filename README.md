@@ -18,23 +18,24 @@ And the homepage is at [https://sites.google.com/view/ground-fusion/home](https:
 Tested on Ubuntu 64-bit 18.04 and ROS Melodic。 but should also work well on Ubuntu20.04 and ROS Noetic.
 
 ### 1.2 OpenCV
-This package requires OpenCV3 and some features of C++11. If you use OpenCV4, you need to make some modifications within the camera_model packages.
+This package requires [OpenCV3](https://github.com/opencv/opencv) and some features of C++11. If you use OpenCV4, you need to make some modifications within the camera_model packages.
 
 ### 1.3 Eigen, Ceres, and PCL
-This package requires Eigen 3.3.7, Ceres 1.14 and PCL 1.17
+This package requires [Eigen 3.3.7](), [Ceres 1.14](https://ceres-solver.googlesource.com/ceres-solver) and [PCL 1.17](https://github.com/PointCloudLibrary/pcl).
+
+### 1.4 Gnss_comm
+This package also requires [gnss_comm](https://github.com/HKUST-Aerial-Robotics/gnss_comm) for ROS message definitions and some utility functions. Follow [those instructions](https://github.com/HKUST-Aerial-Robotics/gnss_comm#2-build-gnss_comm-library) to build the *gnss_comm* package.
+
+### 1.5 Build
 ~~~
+mkdir -p ~/Groundfusion_ws/src
+cd ~/Groundfusion_ws/src
+git clone https://github.com/HKUST-Aerial-Robotics/gnss_comm
 git clone https://github.com/SJTU-ViSYS/Ground-Fusion
 cd Ground-Fusion/thirdparty
-cd ceres
-mkdir build
-cd build
-cmake ..
-make -j8
-sudo make install
-~~~
 
-### 1.4 build
-~~~
+
+cd ../..
 catkin_make -j12
 ~~~
 
