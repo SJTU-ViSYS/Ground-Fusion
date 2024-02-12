@@ -20,7 +20,7 @@ Tested on Ubuntu 64-bit 18.04 and ROS Melodic。 but should also work well on Ub
 ### 1.2 OpenCV
 This package requires OpenCV3 and some features of C++11. If you use OpenCV4, you need to make some modifications within the camera_model packages.
 
-### 1.2 Eigen, Ceres, and PCL
+### 1.3 Eigen, Ceres, and PCL
 This package requires Eigen 3.3.7, Ceres 1.14 and PCL 1.17
 ~~~
 git clone https://github.com/SJTU-ViSYS/Ground-Fusion
@@ -33,9 +33,9 @@ make -j8
 sudo make install
 ~~~
 
-### 1.3 build
+### 1.4 build
 ~~~
-catkin_make
+catkin_make -j12
 ~~~
 
 ## 2. Run examples
