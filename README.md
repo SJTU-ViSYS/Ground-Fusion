@@ -15,9 +15,13 @@ And the homepage is at [https://sites.google.com/view/ground-fusion/home](https:
 
 ## 1. Prerequisites and Installation
 ### 1.1 Ubuntu and ROS
-Tested on Ubuntu 64-bit 18.04 or 20.04. ROS Melodic or Noetic
+Tested on Ubuntu 64-bit 18.04 and ROS Melodic。 but should also work well on Ubuntu20.04 and ROS Noetic.
 
-### 1.2 Eigen and Ceres
+### 1.2 OpenCV
+This package requires OpenCV3 and some features of C++11. If you use OpenCV4, you need to make some modifications within the camera_model packages.
+
+### 1.2 Eigen, Ceres, and PCL
+This package requires Eigen 3.3.7, Ceres 1.14 and PCL 1.17
 ~~~
 git clone https://github.com/SJTU-ViSYS/Ground-Fusion
 cd Ground-Fusion/thirdparty
