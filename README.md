@@ -13,7 +13,7 @@ The dataset is at [https://github.com/sjtuyinjie/M2DGR-plus](https://github.com/
 And the homepage is at [https://sites.google.com/view/ground-fusion/home](https://sites.google.com/view/ground-fusion/home).
 
 <div align=center>
-<img src="./fig/challenges.jpg" width="600px">
+<img src="./fig/challenges.jpg" width="300px">
 
 </div>
 <p align="center">Figure 1. We categorize corner cases into three types: visual,
