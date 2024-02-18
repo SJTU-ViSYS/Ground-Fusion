@@ -12,6 +12,12 @@ We introduce Ground-Fusion, a low-cost sensor fusion simultaneous localization a
 The dataset is at [https://github.com/sjtuyinjie/M2DGR-plus](https://github.com/sjtuyinjie/M2DGR-plus).
 And the homepage is at [https://sites.google.com/view/ground-fusion/home](https://sites.google.com/view/ground-fusion/home).
 
+<div align=center>
+<img src="./fig/challenges.png" width="800px">
+
+</div>
+<p align="center">Figure 1. We categorize corner cases into three types: visual,
+wheel, and GNSS challenges.</p>
 
 ## 1. Prerequisites and Installation
 ### 1.1 Ubuntu and ROS
