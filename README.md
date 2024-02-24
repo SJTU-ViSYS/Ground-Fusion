@@ -3,7 +3,7 @@
 
 ## news
 1. 2024.1.29 Accepted by ICRA2024, the codes and the dataset are coming soon!
-2. I'm working on developing the ROS2 version of this project. ** If you are interested to collaborate, feel free to contact (1195391308@qq.com)** .
+2. I'm working on developing the ROS2 version of this project. ** If you are interested to collaborate, feel free to contact (1195391308@qq.com) ** .
 
 ## Introduction
 
