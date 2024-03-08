@@ -2,7 +2,7 @@
 ## Project Author: [Jie Yin](https://github.com/sjtuyinjie?tab=repositories) at (1195391308@qq.com)
 
 ## news
-1. 2024.1.29 Accepted by ICRA2024, the codes and the dataset are coming soon!
+1. 2024.1.29 Accepted by ICRA2024. I have already released the datasets, and will release the code when I attend the ICRA in May,2024.
 ### 2. Next, I'm working on developing the ROS2 version of this project. If you are interested to collaborate to develop more functions, feel free to contact (1195391308@qq.com).
 
 ## Introduction
