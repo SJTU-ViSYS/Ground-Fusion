@@ -28,7 +28,7 @@ Tested on Ubuntu 64-bit 18.04 and ROS Melodic。 but should also work well on Ub
 This package requires [OpenCV3](https://github.com/opencv/opencv) and some features of C++11. If you use OpenCV4, you need to make some modifications within the camera_model packages.
 
 ### 1.3 Eigen, Ceres, and PCL
-This package requires [Eigen 3.3.7](), [Ceres 1.14](https://ceres-solver.googlesource.com/ceres-solver) and [PCL 1.17](https://github.com/PointCloudLibrary/pcl).
+This package requires [Eigen 3.3.7](), [Ceres 1.14](https://ceres-solver.googlesource.com/ceres-solver) and [PCL](https://github.com/PointCloudLibrary/pcl).
 
 ### 1.4 Gnss_comm
 This package also requires [gnss_comm](https://github.com/HKUST-Aerial-Robotics/gnss_comm) for ROS message definitions and some utility functions.
