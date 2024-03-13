@@ -22,10 +22,10 @@ wheel, and GNSS challenges.</p>
 
 ## 1. Prerequisites and Installation
 ### 1.1 Ubuntu and ROS
-Tested on Ubuntu 64-bit 18.04 and ROS Melodic。 but should also work well on Ubuntu20.04 and ROS Noetic.
+Tested on Ubuntu 18.04 (with ROS Melodic and OpenCV3) and on Ubuntu 20.04(with ROS Noetic and OpenCV4).
 
 ### 1.2 OpenCV
-This package requires [OpenCV3](https://github.com/opencv/opencv) and some features of C++11. If you use OpenCV4, you need to make some modifications within the camera_model packages.
+This package requires [OpenCV 3/4](https://github.com/opencv/opencv) and some features of C++11. 
 
 ### 1.3 Eigen, Ceres, and PCL
 This package requires [Eigen 3.3.7](), [Ceres 1.14](https://ceres-solver.googlesource.com/ceres-solver),[Sophus](https://github.com/strasdat/Sophus.git ) and [PCL](https://github.com/PointCloudLibrary/pcl).
