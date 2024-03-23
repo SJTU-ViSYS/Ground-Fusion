@@ -3,9 +3,8 @@
 
 ## news
 1. 2024.1.29 Accepted by ICRA2024. I have already released the datasets, and will release the code when I attend the ICRA in May,2024.
-2. ## Notice! I am currently looking for an experienced developer to collaborate on the next version of Ground-Fusion.Should you be an experienced and enthusiastic SLAM developer, feel free to contact 195391308@qq.com.
+
    
-注意！本人正在寻找有经验的开发者合作维护和改进Ground-Fusion算法。本人的愿景是开发一个低成本的、尽可能鲁棒和精确的开源SLAM系统以便部署到现实的ground robots/vehicles上。经过本人的丰富测试，发现Ground-Fusion的定位性能已经非常不错，但在实现上还有许多值得进一步优化和改进的地方。这需要解决很多工程上的问题，例如迁移到ROS2、提高地图的质量、优化计算效率等等。相信在这个过程中不仅可以锻炼自己的coding能力，也会让你有一个非常扎实的项目经历。如果你也是个经验丰富、充满热情的开源开发者，欢迎联系195391308@qq.com，我会提前给你源码并提供指导~ 非诚勿扰
 
 ## Introduction
 
