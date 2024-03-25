@@ -61,11 +61,12 @@ sudo make install
 This package also requires [gnss_comm](https://github.com/HKUST-Aerial-Robotics/gnss_comm) for ROS message definitions and some utility functions.
 
 ### 1.5 Configure gcc (For Ubuntu 20.04)
+~~~
 sudo apt-get install g++-8
 sudo apt-get install gcc-8
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 20
 sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 20
-
+~~~
 
 ### 1.6 Build Ground-Fusion
 After install all 3rd parties：
