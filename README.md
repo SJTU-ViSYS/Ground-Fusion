@@ -30,22 +30,57 @@ This package requires [OpenCV 3/4](https://github.com/opencv/opencv) and some fe
 
 ### 1.3 Eigen, Ceres, and PCL
 This package requires [Eigen 3.3.7](), [Ceres 1.14](https://ceres-solver.googlesource.com/ceres-solver),[Sophus](https://github.com/strasdat/Sophus.git ) and [PCL 1.11](https://github.com/PointCloudLibrary/pcl).
+You need to download they in your thirdparty folder, and then:
+~~~
+sudo apt-get update
+sudo apt-get install -y cmake libgoogle-glog-dev libgflags-dev libatlas-base-dev libsuitesparse-dev 
+cd thirdparty/eigen
+mkdir -p build && cd build
+cmake ..
+sudo make install
+cd ../../ceres-solver
+mkdir -p build && cd build
+cmake ..
+make -j$(nproc) 
+sudo make install
+sudo apt-get install -y libflann-dev libvtk6-dev libboost-all-dev ros-noetic-pcl-ros libfmt-dev
+cd ../../pcl
+mkdir -p build && cd build
+cmake ..
+make -j$(nproc)
+sudo make install
+cd ../../Sophus
+mkdir -p build && cd build
+cmake ..
+make -j$(nproc) 
+sudo make install
+~~~
+
 
 ### 1.4 Gnss_comm
 This package also requires [gnss_comm](https://github.com/HKUST-Aerial-Robotics/gnss_comm) for ROS message definitions and some utility functions.
 
-### 1.5 Build
+### 1.5 Configure gcc (For Ubuntu 20.04)
+sudo apt-get install g++-8
+sudo apt-get install gcc-8
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 20
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 20
+
+
+### 1.6 Build Ground-Fusion
+After install all 3rd parties：
 ~~~
 mkdir -p ~/Groundfusion_ws/src
 cd ~/Groundfusion_ws/src
 git clone https://github.com/HKUST-Aerial-Robotics/gnss_comm
 git clone https://github.com/SJTU-ViSYS/Ground-Fusion
-cd Ground-Fusion/thirdparty
-
-
 cd ../..
 catkin_make -j12
 ~~~
+
+### 1.6 Tips
+
+
 
 ## 2. Run examples
 
@@ -88,12 +123,12 @@ rosrun dense_map dense_map_node src/Ground-Fusion/config/realsense/m2dgrp.yaml
 
 
 
-## 3. Parameter configuration
 
-## 4. Acknowledgement
+
+## 3. Acknowledgement
 Thanks support from National Key R&D Program (2022YFB3903802), NSFC(62073214), and Midea Group. This project is based on [GVINS](https://github.com/HKUST-Aerial-Robotics/GVINS), and has borrowed some codes from open-source projects [VIW-Fusion](https://github.com/TouchDeeper/VIW-Fusion) and [VINS-RGBD](https://github.com/STAR-Center/VINS-RGBD), thanks for your great contribution!
 
-## 5. License
+## 4. License
 The source code of Ground-Fusion is released under GPLv3 license. Do not use this project for any commercial purpose unless permitted by authors. Yin Jie is still working on improving the system. For any technical issues, please contact him at <1195391308@qq.com>.
 
 If you use this work in an academic work, please cite:
