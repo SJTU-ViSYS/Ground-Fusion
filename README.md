@@ -79,7 +79,6 @@ cd ../..
 catkin_make -j12
 ~~~
 
-### 1.6 Tips
 
 
 
