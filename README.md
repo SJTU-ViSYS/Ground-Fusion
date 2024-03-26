@@ -3,6 +3,8 @@
 
 ## news
 
+2024.3.26 I have already release the Ground-fusion codes (Ubuntu 18.04 version).
+
 2024.3.25 I have already release the Ground-fusion codes (Ubuntu 20.04 version).
 
 2024.1.29 Accepted by ICRA2024. I have already released the datasets, and will release the code soon.
