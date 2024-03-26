@@ -96,12 +96,12 @@ CameraPtr
 CameraFactory::generateCameraFromYamlFile( const std::string& filename )
 {
     cv::FileStorage fs( filename, cv::FileStorage::READ );
-    
+
     if ( !fs.isOpened( ) )
     {
         return CameraPtr( );
     }
-    
+
     Camera::ModelType modelType = Camera::MEI;
     if ( !fs["model_type"].isNone( ) )
     {

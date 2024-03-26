@@ -13,7 +13,7 @@ double INIT_DEPTH;
 double MIN_PARALLAX;
 double ACC_N, ACC_W;
 double GYR_N, GYR_W;
-
+// new below
 double VEL_N_wheel;
 double GYR_N_wheel;
 double SX;
@@ -67,6 +67,7 @@ std::string GROUNDTRUTH_TOPIC;
 
 CameraExtrinsicAdjustType CAM_EXT_ADJ_TYPE;
 WheelExtrinsicAdjustType WHEEL_EXT_ADJ_TYPE;
+// new above
 
 std::vector<Eigen::Matrix3d> RIC;
 std::vector<Eigen::Vector3d> TIC;
@@ -92,7 +93,7 @@ int STEREO;
 int DEPTH;
 int USE_IMU;
 int MULTIPLE_THREAD;
-int EQUALIZE;
+int EQUALIZE; // new
 map<int, Eigen::Vector3d> pts_gt;
 std::string IMAGE0_TOPIC, IMAGE1_TOPIC;
 std::string FISHEYE_MASK;
@@ -103,6 +104,7 @@ double F_THRESHOLD;
 int SHOW_TRACK;
 int FLOW_BACK;
 
+// GNSS new
 bool GNSS_ENABLE;
 std::string GNSS_EPHEM_TOPIC;
 std::string GNSS_GLO_EPHEM_TOPIC;
@@ -137,7 +139,6 @@ T readParam(ros::NodeHandle &n, std::string name)
 
 void readParameters(std::string config_file)
 {
-    std::cout << "Test_ky" << std::endl;
     FILE *fh = fopen(config_file.c_str(), "r");
     if (fh == NULL)
     {
@@ -158,6 +159,7 @@ void readParameters(std::string config_file)
     fsSettings["use_line"] >> USE_LINE;
     fsSettings["use_yolo"] >> USE_YOLO;
     fsSettings["use_mcc"] >> USE_MCC;
+    // new below
 
     is_imu_excited = false;
     // vision_failure=false;
@@ -166,7 +168,7 @@ void readParameters(std::string config_file)
     fsSettings["feature0_topic"] >> FEATURE0_TOPIC;
     fsSettings["feature1_topic"] >> FEATURE1_TOPIC;
     fsSettings["groundtruth_topic"] >> GROUNDTRUTH_TOPIC;
-    EQUALIZE = fsSettings["equalize"];
+    EQUALIZE = fsSettings["equalize"]; // new
     printf("EQUALIZE: %d\n", EQUALIZE);
 
     depth_threshold = fsSettings["depth_threshold"];
@@ -217,6 +219,7 @@ void readParameters(std::string config_file)
         G.z() = fsSettings["g_norm"];
     }
 
+    // new below
     fsSettings["output_path"] >> OUTPUT_FOLDER;
 
     {
@@ -340,6 +343,8 @@ void readParameters(std::string config_file)
         EX_CALIB_RESULT_PATH = OUTPUT_FOLDER + "/extrinsic_parameter.csv";
     }
 
+    // new above
+
     SOLVER_TIME = fsSettings["max_solver_time"];
     NUM_ITERATIONS = fsSettings["max_num_iterations"];
     MIN_PARALLAX = fsSettings["keyframe_parallax"];
@@ -353,11 +358,11 @@ void readParameters(std::string config_file)
     fout.close();
     std::ofstream foutw(VINS_RESULT_PATH2, std::ios::out);
     foutw.close();
-
+    // new
     GROUNDTRUTH_PATH = OUTPUT_FOLDER + "/groundtruth.csv";
     std::cout << "groundtruth path " << GROUNDTRUTH_PATH << std::endl;
     std::ofstream fout2(GROUNDTRUTH_PATH, std::ios::out);
-    fout2.close();
+    fout2.close(); // new above
 
     ESTIMATE_EXTRINSIC = fsSettings["estimate_extrinsic"];
     if (ESTIMATE_EXTRINSIC == 2)
@@ -383,12 +388,13 @@ void readParameters(std::string config_file)
         cv::cv2eigen(cv_T, T);
         RIC.push_back(T.block<3, 3>(0, 0));
         TIC.push_back(T.block<3, 1>(0, 3));
-
+        // new 归一化
         Eigen::Quaterniond QIC(RIC[0]);
         QIC.normalize();
         RIC[0] = QIC.toRotationMatrix();
     }
 
+    // new below
     if (ESTIMATE_EXTRINSIC)
     {
         int extrinsic_type = static_cast<int>(fsSettings["extrinsic_type"]);
@@ -424,6 +430,8 @@ void readParameters(std::string config_file)
         std::ofstream foutD(EXTRINSIC_CAM_ITERATE_PATH, std::ios::out);
         foutD.close();
     }
+
+    // new above
 
     NUM_OF_CAM = fsSettings["num_of_cam"];
     printf("camera number %d\n", NUM_OF_CAM);
@@ -480,7 +488,7 @@ void readParameters(std::string config_file)
     BIAS_GYR_THRESHOLD = 0.1;
 
     TD = fsSettings["td"];
-    OFFSET_SIM = fsSettings["offset"];
+    OFFSET_SIM = fsSettings["offset"]; // new
     ESTIMATE_TD = fsSettings["estimate_td"];
     if (ESTIMATE_TD)
     {
@@ -492,6 +500,7 @@ void readParameters(std::string config_file)
     else
         ROS_INFO_STREAM("Synchronized sensors, fix time offset: " << TD);
 
+    // new below
     TD_WHEEL = fsSettings["td_wheel"];
     ESTIMATE_TD_WHEEL = fsSettings["estimate_td_wheel"];
     if (ESTIMATE_TD_WHEEL)
@@ -503,6 +512,8 @@ void readParameters(std::string config_file)
     }
     else
         ROS_INFO_STREAM("Synchronized sensors, fix time offset: " << TD_WHEEL);
+
+    // new above
 
     ROW = fsSettings["image_height"];
     COL = fsSettings["image_width"];

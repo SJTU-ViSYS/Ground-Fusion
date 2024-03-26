@@ -21,7 +21,7 @@ imu_topic: "/camera/imu"
 wheel_topic: "/odom"   
 image0_topic: "/camera/color/image_raw"
 image1_topic: "/camera/aligned_depth_to_color/image_raw"
-output_path: "//home/ky/Vslam/groundfusion_ws/src/Ground-Fusion/z_output/pub_version_gc/"
+output_path: "//home/car/Downloads/newproject9/groundfusion_ws/src/Ground-Fusion/z_output/pub_version_gc/"
 
 cam0_calib: "idc_cam.yaml"
 cam1_calib: "idc_cam.yaml"

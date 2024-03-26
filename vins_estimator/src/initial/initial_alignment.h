@@ -17,7 +17,7 @@
 #include <ros/ros.h>
 #include <map>
 #include "../estimator/feature_manager.h"
-#include "../factor/wheel_integration_base.h"
+#include "../factor/wheel_integration_base.h"//new
 
 using namespace Eigen;
 using namespace std;
@@ -35,7 +35,7 @@ class ImageFrame
         Matrix3d R;
         Vector3d T;
         IntegrationBase *pre_integration;
-        WheelIntegrationBase *pre_integration_wheel;
+        WheelIntegrationBase *pre_integration_wheel;//new
         bool is_key_frame;
 };
 void solveGyroscopeBias(map<double, ImageFrame> &all_image_frame, Vector3d* Bgs);

@@ -1,8 +1,8 @@
 /*******************************************************
  * Copyright (C) 2019, Aerial Robotics Group, Hong Kong University of Science and Technology
- * 
+ *
  * This file is part of VINS.
- * 
+ *
  * Licensed under the GNU General Public License v3.0;
  * you may not use this file except in compliance with the License.
  *******************************************************/
@@ -39,7 +39,7 @@ public:
     uv.y() = _point(4);
     velocity.x() = _point(5);
     velocity.y() = _point(6);
-    depth = _point(7); 
+    depth = _point(7); // new
     cur_td = td;
     is_stereo = false;
   }
@@ -60,7 +60,7 @@ public:
   Vector2d uv, uvRight;
   Vector2d velocity, velocityRight;
   bool is_stereo;
-  double depth; 
+  double depth; // new
 };
 
 class FeaturePerId
@@ -71,19 +71,17 @@ public:
   vector<FeaturePerFrame> feature_per_frame;
   int used_num;
   double estimated_depth;
-  int estimate_flag; //0 initial; 1 by depth image; 2 by triangulate
+  int estimate_flag; // 0 initial; 1 by depth image; 2 by triangulate
   int solve_flag;    // 0 haven't solve yet; 1 solve succ; 2 solve fail;
 
   FeaturePerId(int _feature_id, int _start_frame)
       : feature_id(_feature_id), start_frame(_start_frame),
-        used_num(0), estimated_depth(-1.0), solve_flag(0), estimate_flag(0) 
+        used_num(0), estimated_depth(-1.0), solve_flag(0), estimate_flag(0) // new
   {
   }
 
   int endFrame();
 };
-
-
 
 class lineFeaturePerFrame
 {
@@ -147,13 +145,11 @@ public:
   int endFrame();
 };
 
-
-
 class FeatureManager
 {
 public:
   FeatureManager(Matrix3d _Rs[]);
-  //line
+  // line
   int getLineFeatureCount();
   MatrixXd getLineOrthVector(Vector3d Ps[], Vector3d tic[], Matrix3d ric[]);
   void setLineOrth(MatrixXd x, Vector3d Ps[], Matrix3d Rs[], Vector3d tic[], Matrix3d ric[]);
@@ -164,11 +160,11 @@ public:
   void removeLineOutlier(Vector3d Ps[], Vector3d tic[], Matrix3d ric[]);
   void removeLineOutlier();
 
-  //void triangulateLine(Vector3d Ps[], Vector3d tic[], Matrix3d ric[]);
+  // void triangulateLine(Vector3d Ps[], Vector3d tic[], Matrix3d ric[]);
   void triangulateLine(int frameCnt, Vector3d Ps[], Matrix3d Rs[], Vector3d tic[], Matrix3d ric[]);
-  
+
   list<lineFeaturePerId> linefeature;
-  //line above
+  // line above
 
   void setRic(Matrix3d _ric[]);
   void clearState();
@@ -177,7 +173,7 @@ public:
   bool addFeatureCheckParallaxwithline(int frame_count, const map<int, vector<pair<int, Eigen::Matrix<double, 8, 1>>>> &image, const map<int, vector<pair<int, Vector4d>>> &lines, double td);
   vector<pair<Vector3d, Vector3d>> getCorresponding(int frame_count_l, int frame_count_r);
   vector<pair<Vector3d, Vector3d>> getCorrespondingWithDepth(int frame_count_l, int frame_count_r);
-  //void updateDepth(const VectorXd &x);
+  // void updateDepth(const VectorXd &x);
   void setDepth(const VectorXd &x);
   void removeFailures();
   void clearDepth();
@@ -187,11 +183,10 @@ public:
   void triangulatePoint(Eigen::Matrix<double, 3, 4> &Pose0, Eigen::Matrix<double, 3, 4> &Pose1,
                         Eigen::Vector2d &point0, Eigen::Vector2d &point1, Eigen::Vector3d &point_3d);
   void initFramePoseByPnP(int frameCnt, Vector3d Ps[], Matrix3d Rs[], Vector3d tic[], Matrix3d ric[]);
-  bool getPoseByWheelOdom(Eigen::Vector3d& Pcam, Eigen::Matrix3d& Rcam, const double curTime);
-  void getOdomData(Eigen::Quaterniond& Q, Eigen::Vector3d& P, nav_msgs::Odometry::ConstPtr &odomData);
-  void initFramePoseByOdom(int frameCnt, Vector3d Ps[], Matrix3d Rs[], Vector3d tic[], Matrix3d ric[],const double curtime);
-  void linear_insert(Eigen::Quaterniond& Qodom, Eigen::Vector3d& Podom, const double sync_time, nav_msgs::Odometry::ConstPtr
-        & front_data, nav_msgs::Odometry::ConstPtr& back_data);
+  bool getPoseByWheelOdom(Eigen::Vector3d &Pcam, Eigen::Matrix3d &Rcam, const double curTime);
+  void getOdomData(Eigen::Quaterniond &Q, Eigen::Vector3d &P, nav_msgs::Odometry::ConstPtr &odomData);
+  void initFramePoseByOdom(int frameCnt, Vector3d Ps[], Matrix3d Rs[], Vector3d tic[], Matrix3d ric[], const double curtime);
+  void linear_insert(Eigen::Quaterniond &Qodom, Eigen::Vector3d &Podom, const double sync_time, nav_msgs::Odometry::ConstPtr &front_data, nav_msgs::Odometry::ConstPtr &back_data);
   bool solvePoseByPnP(Eigen::Matrix3d &R_initial, Eigen::Vector3d &P_initial,
                       vector<cv::Point2f> &pts2D, vector<cv::Point3f> &pts3D);
   void removeBackShiftDepth(Eigen::Matrix3d marg_R, Eigen::Vector3d marg_P, Eigen::Matrix3d new_R, Eigen::Vector3d new_P);

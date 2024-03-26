@@ -25,6 +25,7 @@ const int WINDOW_SIZE = 10;
 const int NUM_OF_F = 1000;
 const int LINE_MIN_OBS = 5; // line
 // #define UNIT_SPHERE_ERROR
+// new above
 extern int USE_LINE;
 extern int USE_YOLO;
 extern int USE_MCC;
@@ -92,6 +93,7 @@ enum WheelExtrinsicAdjustType
 extern CameraExtrinsicAdjustType CAM_EXT_ADJ_TYPE;
 extern WheelExtrinsicAdjustType WHEEL_EXT_ADJ_TYPE;
 
+// new above
 extern double INIT_DEPTH;
 extern double MIN_PARALLAX;
 extern int ESTIMATE_EXTRINSIC;
@@ -156,7 +158,7 @@ void readParameters(std::string config_file);
 enum SIZE_PARAMETERIZATION
 {
     SIZE_POSE = 7,
-    SIZE_ROTATION = 4,
+    SIZE_ROTATION = 4, // new
     SIZE_SPEEDBIAS = 9,
     SIZE_FEATURE = 1,
     SIZE_LINE = 4 // line

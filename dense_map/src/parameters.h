@@ -20,8 +20,6 @@
 #include <sensor_msgs/PointCloud.h>
 #include <sensor_msgs/image_encodings.h>
 #include <cv_bridge/cv_bridge.h>
-#include <opencv2/imgproc/types_c.h>
-#include <opencv2/imgproc/imgproc_c.h>
 
 extern camodocal::CameraPtr m_camera;
 extern Eigen::Vector3d tic;

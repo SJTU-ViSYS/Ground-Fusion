@@ -27,13 +27,11 @@ find_package(catkin REQUIRED COMPONENTS
 
   nodelet
 
-  # gnss new
   rosbag
   message_generation
   gnss_comm
 )
 
-# gnss new
 add_message_files(
   DIRECTORY msg
   FILES LocalSensorExternalTrigger.msg
@@ -81,7 +79,7 @@ endif(X11_FOUND)
 
 # Find rquired packeges
 find_package(Boost REQUIRED COMPONENTS thread)
-find_package(OpenCV 4 REQUIRED)
+find_package(OpenCV 3 REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
 # Enable OPENCV in darknet
@@ -321,7 +319,7 @@ add_library(vins_lib
   src/factor/pose_anchor_factor.cpp
   src/initial/gnss_vi_initializer.cpp
 )
-target_link_libraries(vins_lib ${catkin_LIBRARIES} ${OpenCV_LIBS} ${CERES_LIBRARIES} /usr/local/lib/libSophus.so fmt)
+target_link_libraries(vins_lib ${catkin_LIBRARIES} ${OpenCV_LIBS} ${CERES_LIBRARIES} /usr/local/lib/libSophus.so)
 
 add_executable(vins_node src/rosNodeTest.cpp)
 target_link_libraries(vins_node vins_lib /usr/local/lib/libSophus.so

@@ -34,8 +34,6 @@
 #include <eigen3/Eigen/Dense>
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/eigen.hpp>
-#include <opencv2/imgproc/imgproc_c.h>
-#include <opencv2/imgcodecs.hpp>
 #include "keyframe.h"
 #include "utility/tic_toc.h"
 #include "pose_graph.h"
@@ -314,10 +312,125 @@ void poisson_reconstruction(pcl::PointCloud<pcl::PointXYZRGB>::Ptr object_cloud)
     toPCLPointCloud2(cloud_color_mesh, mesh.cloud);
     pcl::io::savePLYFile("/home/car/Downloads/newproject6/final_ws/src/RGBD-WINS-Fusion/z_mesh/rgb_mesh.ply", mesh);
 
-  
+    // 显示结果图
+    // boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer(new pcl::visualization::PCLVisualizer("3D viewer"));
+    // viewer->setBackgroundColor(0, 0, 0);
+    // viewer->addPolygonMesh(mesh, "my");
+    // viewer->addCoordinateSystem(50.0);
+    // viewer->initCameraParameters();
+    // while (!viewer->wasStopped())
+    // {
+    //     viewer->spinOnce(100);
+    //     boost::this_thread::sleep(boost::posix_time::microseconds(100000));
+    // }
 }
 
+// bad version
+//  void poisson_reconstruction(pcl::PointCloud<pcl::PointXYZRGB>::Ptr object_cloud)
+//  {
+//        PointCloud<pcl::PointXYZRGB>::Ptr cloudx(new PointCloud<pcl::PointXYZRGB>());
+//        pcl::copyPointCloud(*object_cloud, *cloudx);
+//        PointCloud<pcl::PointXYZRGB>::Ptr filtered(new PointCloud<pcl::PointXYZRGB>());
+//        PassThrough<pcl::PointXYZRGB> filter;
+//        filter.setInputCloud(cloudx);
+//        filter.filter(*filtered);
+//        cout << "passthrough filter complete" << endl;
 
+//       cout << "begin normal estimation" << endl;
+//       pcl::NormalEstimationOMP<pcl::PointXYZRGB, Normal> ne;//计算点云法向
+//       ne.setNumberOfThreads(8);//设定临近点
+//       ne.setInputCloud(filtered);
+//       ne.setRadiusSearch(0.01);//设定搜索半径
+//       Eigen::Vector4f centroid;
+//       compute3DCentroid(*filtered, centroid);//计算点云中心
+//       ne.setViewPoint(centroid[0], centroid[1], centroid[2]);//将向量计算原点置于点云中心
+
+//       PointCloud<Normal>::Ptr cloud_normals (new PointCloud<Normal>());
+//       ne.compute(*cloud_normals);
+//       cout << "normal estimation complete" << endl;
+//       cout << "reverse normals' direction" << endl;
+
+// //将法向量反向
+//       for(size_t i = 0; i < cloud_normals->size(); ++i)
+//       {
+//         cloud_normals->points[i].normal_x *= -1;
+//         cloud_normals->points[i].normal_y *= -1;
+//         cloud_normals->points[i].normal_z *= -1;
+//       }
+
+// //融合RGB点云和法向
+//       cout << "combine points and normals" << endl;
+//       PointCloud<pcl::PointXYZRGBNormal>::Ptr cloud_smoothed_normals(new PointCloud<PointXYZRGBNormal>());
+//       concatenateFields(*filtered, *cloud_normals, *cloud_smoothed_normals);
+
+// //泊松重建
+//       cout << "begin poisson reconstruction" << endl;
+//       Poisson<pcl::PointXYZRGBNormal> poisson;
+//       //poisson.setDegree(2);
+//       poisson.setDepth(8);
+//       poisson.setSolverDivide (6);
+//       poisson.setIsoDivide (6);
+
+//       poisson.setConfidence(false);
+//       poisson.setManifold(false);
+//       poisson.setOutputPolygons(false);
+
+//       poisson.setInputCloud(cloud_smoothed_normals);
+//       PolygonMesh mesh;
+//       poisson.reconstruct(mesh);
+
+//       cout << "finish poisson reconstruction" << endl;
+
+// //给mesh染色
+//       pcl::PointCloud<pcl::PointXYZRGB> cloud_color_mesh;
+//       pcl::fromPCLPointCloud2(mesh.cloud, cloud_color_mesh);
+
+//       pcl::KdTreeFLANN<pcl::PointXYZRGB> kdtree;
+//       kdtree.setInputCloud (cloudx);
+//       // K nearest neighbor search
+//       int K = 5;
+//       std::vector<int> pointIdxNKNSearch(K);
+//       std::vector<float> pointNKNSquaredDistance(K);
+//       for(int i=0;i<cloud_color_mesh.points.size();++i)
+//       {
+//          uint8_t r = 0;
+//          uint8_t g = 0;
+//          uint8_t b = 0;
+//          float dist = 0.0;
+//          int red = 0;
+//          int green = 0;
+//          int blue = 0;
+//          uint32_t rgb;
+
+//          if ( kdtree.nearestKSearch (cloud_color_mesh.points[i], K, pointIdxNKNSearch, pointNKNSquaredDistance) > 0 )
+//          {
+//             for (int j = 0; j < pointIdxNKNSearch.size (); ++j)
+//             {
+
+//                r = cloudx->points[ pointIdxNKNSearch[j] ].r;
+//                g = cloudx->points[ pointIdxNKNSearch[j] ].g;
+//                b = cloudx->points[ pointIdxNKNSearch[j] ].b;
+
+//                red += int(r);
+//                green += int(g);
+//                blue += int(b);
+//                dist += 1.0/pointNKNSquaredDistance[j];
+
+//                std::cout<<"red: "<<int(r)<<std::endl;
+//                std::cout<<"green: "<<int(g)<<std::endl;
+//                std::cout<<"blue: "<<int(b)<<std::endl;
+//                cout<<"dis:"<<dist<<endl;
+//             }
+//          }
+
+//          cloud_color_mesh.points[i].r = int(red/pointIdxNKNSearch.size ()+0.5);
+//          cloud_color_mesh.points[i].g = int(green/pointIdxNKNSearch.size ()+0.5);
+//          cloud_color_mesh.points[i].b = int(blue/pointIdxNKNSearch.size ()+0.5);
+
+//       }
+//       toPCLPointCloud2(cloud_color_mesh, mesh.cloud);
+//       pcl::io::savePLYFile("/home/car/Downloads/newproject6/final_ws/src/RGBD-WINS-Fusion/z_mesh/object_mesh.ply", mesh);
+// }
 
 void new_sequence()
 {
@@ -862,7 +975,7 @@ int main(int argc, char **argv)
     {
         printf("load grid map\n");
         g_map_puber = n.advertise<nav_msgs::OccupancyGrid>("grid_map", 1);
-        cv::Mat grid_img = cv::imread(GRID_MAP_PATH + "map.png", cv::IMREAD_GRAYSCALE);
+        cv::Mat grid_img = cv::imread(GRID_MAP_PATH + "map.png", CV_LOAD_IMAGE_GRAYSCALE);
         cv::flip(grid_img, grid_img, 0);
         cv::Mat grid_img2;
         grid_img.convertTo(grid_img2, CV_32F, 1 / 255.0, 0.0);

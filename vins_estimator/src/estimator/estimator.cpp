@@ -9,7 +9,7 @@
 
 #include "estimator.h"
 #include "../utility/visualization.h"
-#include "../factor/pose_subset_parameterization.h"
+#include "../factor/pose_subset_parameterization.h" //new
 #include "../factor/orientation_subset_parameterization.h"
 
 #define MAX_GNSS_CAMERA_DELAY 0.1
@@ -516,7 +516,7 @@ bool Estimator::IMUAvailable(double t)
     else
         return false;
 }
-bool Estimator::WheelAvailable(double t)
+bool Estimator::WheelAvailable(double t) // new
 {
     if (!wheelVelBuf.empty() && t <= wheelVelBuf.back().first)
         return true;
@@ -541,10 +541,10 @@ void Estimator::processMeasurements()
             if (USE_LINE)
             {
                 // cout<<"line feature buf:"<<linefeatureBuf.size()<<endl;
-                linefeature = linefeatureBuf.front();
+                linefeature = linefeatureBuf.front(); // line
             }
             curTime = feature.first + td;
-            curTime_wheel = curTime - td_wheel;
+            curTime_wheel = curTime - td_wheel; // new
             while (1)
             {
                 if ((!USE_IMU || IMUAvailable(feature.first + td)))
@@ -558,7 +558,7 @@ void Estimator::processMeasurements()
                     std::this_thread::sleep_for(dura);
                 }
             }
-            while (1)
+            while (1) // new
             {
                 if ((!USE_WHEEL || WheelAvailable(feature.first + td - td_wheel)))
                     break;
@@ -576,10 +576,11 @@ void Estimator::processMeasurements()
                 getIMUInterval(prevTime, curTime, accVector, gyrVector);
 
             featureBuf.pop();
-
+            // ROS_INFO("here1");
             if (USE_LINE)
             {
                 linefeatureBuf.pop();
+                // ROS_INFO("here2");
             }
             if (GNSS_ENABLE)
             {
@@ -607,6 +608,10 @@ void Estimator::processMeasurements()
                         dt = accVector[i].first - accVector[i - 1].first;
                     processIMU(accVector[i].first, dt, accVector[i].second, gyrVector[i].second);
                 }
+                // cout << "imu change:" << dP_imu << endl
+                //      << endl;
+                // cout << "now imu pose:" << P_imu_tmp << endl;
+                // cout<<"acc vector size:"<<accVector.size()<<endl;//28  27
             }
             if (USE_WHEEL)
             {
@@ -625,6 +630,11 @@ void Estimator::processMeasurements()
 
                     processWheel(velWheelVector[i].first, dt, velWheelVector[i].second, gyrWheelVector[i].second);
                 }
+                // cout << "wheel change:" << dP_wheel << endl
+                //      << endl;
+                // cout << "Ps:" << Ps[WINDOW_SIZE] << endl
+                //      << endl;
+                // cout << "now wheel pose:" << P_wheel_tmp << endl;
 
                 double dis = (dP_wheel - dP_imu).norm();
                 // cout << "imu wheel dis:" << dis << endl;
@@ -634,6 +644,13 @@ void Estimator::processMeasurements()
                 {
                     wheelanomaly = true;
                 }
+                // cout << "wheel pose norm:" << dP_wheel.norm() << "  imu pose norm:" << dP_imu.norm() << "  imu wheel dis:" << dis<<endl;
+                // cout << "imu pose norm:" << dP_imu.norm() << endl;
+
+                // ofstream foutC("//media/car/YJ07/dataset/gfgnss/result/gf/diffnorm.txt", ios::app);
+                // foutC.setf(ios::fixed, ios::floatfield);
+                // foutC << std::setprecision(9)
+                //       << curTime << " " << dis  << std::endl;
 
                 if (dP_wheel.norm() < 0.001)
                 { // lower than 0.002
@@ -655,6 +672,7 @@ void Estimator::processMeasurements()
 
             if (GNSS_ENABLE && !gnss_msg.empty())
             {
+                // cout<<"herexxxxxx"<<endl;
 
                 processGNSS(gnss_msg);
             }
@@ -774,6 +792,12 @@ void Estimator::processIMU(double t, double dt, const Vector3d &linear_accelerat
         // Rs[j] *= Utility::deltaQ(un_gyr * dt).toRotationMatrix();
         Vector3d un_acc_1 = Rs[j] * (linear_acceleration - Bas[j]) - g;
         Vector3d un_acc = 0.5 * (un_acc_0 + un_acc_1);
+        // cout<<"bg :"<<Bgs[j]<<endl<<endl<<endl;
+        //  Ps[j] += dt * Vs[j] + 0.5 * dt * dt * un_acc;
+        //  Vs[j] += dt * un_acc;
+
+        // latest_Q_f] * rio;
+        // latest_P_wheel = Rs[frame_count] * tio + Ps[frame_count];
 
         dP_imu = dP_imu + dt * Vs[j] + 0.5 * dt * dt * un_acc;
         P_imu_tmp += dt * Vs[j] + 0.5 * dt * dt * un_acc;
@@ -867,6 +891,13 @@ void Estimator::processImage(const map<int, vector<pair<int, Eigen::Matrix<doubl
     tmp_pre_integration = new IntegrationBase{acc_0, gyr_0, Bas[frame_count], Bgs[frame_count]};
     tmp_wheel_pre_integration = new WheelIntegrationBase{vel_0_wheel, gyr_0_wheel, sx, sy, sw, td_wheel}; // 重建一个新的，为下一次processWheel做准备
 
+    // stationary detector
+
+    // if (!is_imu_excited && solver_flag == NON_LINEAR)
+    // {
+    //     checkimuexcited();
+    // }
+
     checkimu();
     if (varstationary && preintegrationstationary)
     {
@@ -886,7 +917,9 @@ void Estimator::processImage(const map<int, vector<pair<int, Eigen::Matrix<doubl
         // ROS_WARN("Visual stationary detected!");
         visualstationary = true;
     }
+    // cout<<"visual st:"<<visualstationary<<endl;
 
+    // if (imustationary && (visualstationary || wheelstationary))
     if ((imustationary && wheelstationary) || (visualstationary && wheelstationary) || (imustationary && visualstationary))
     {
         systemstationary = true;
@@ -953,7 +986,7 @@ void Estimator::processImage(const map<int, vector<pair<int, Eigen::Matrix<doubl
                             updateGNSSStatistics();
                         }
                     }
-
+                    // updateLatestStates();//new  why
                     slideWindow();
                     ROS_INFO("Initialization finish!");
                 }
@@ -1168,7 +1201,8 @@ void Estimator::processImagewithline(const map<int, vector<pair<int, Eigen::Matr
     ROS_DEBUG("new image coming ------------------------------------------");
     ROS_DEBUG("Adding feature points %lu", image.size());
     ROS_INFO("Adding feature lines %lu", linefeature.size());
-
+    // cout<<linefeature.second(0)<<linefeature.second(1)<<linefeature.second(2)<<linefeature.second(3)<<linefeature.second(4)<<endl;
+    // cout<<linefeature.size()<<endl;//why all 0?
     if (f_manager.addFeatureCheckParallaxwithline(frame_count, image, linefeature, td))
     {
         marginalization_flag = MARGIN_OLD;
@@ -1247,6 +1281,7 @@ void Estimator::processImagewithline(const map<int, vector<pair<int, Eigen::Matr
                         optimization();
                     }
 
+                    // updateLatestStates();//new  why
                     slideWindow();
                     ROS_INFO("Initialization finish!");
                 }
@@ -1528,7 +1563,10 @@ void Estimator::processGNSS(const std::vector<ObsPtr> &gnss_meas)
         valid_ephems.push_back(best_ephem);
     }
     cout << "valid satellite num:" << valid_meas.size() << endl; //<<endl<<endl<<endl;
-   
+    // ofstream foutC1("/media/car/YJ07/dataset/gfgnss/result/gf/satenum.txt", ios::app);
+    //             foutC1.setf(ios::fixed, ios::floatfield);
+    //             foutC1 << std::setprecision(9)
+    //                   << curTime << " " << valid_meas.size() << std::endl;
 
     gnss_meas_buf[frame_count] = valid_meas;
     gnss_ephem_buf[frame_count] = valid_ephems;
@@ -1601,7 +1639,7 @@ bool Estimator::initialStructure()
         }
     }
 
-    if (Bas_calibok == false and systemstationary and solver_flag != NON_LINEAR)
+    if (Bas_calibok == false and systemstationary and solver_flag != NON_LINEAR) // and STATIONARY_INI)
     {
 
         Vector3d tmp_Bas = aver_g - Utility::g2R(aver_g).inverse() * G;
@@ -2200,7 +2238,10 @@ void Estimator::checkimu()
     // cout << "cnt num:" << ini_cnt << endl;
     // cout<<"var check:"<<var<<endl<<endl;
 
-  
+    ofstream foutC2("//media/car/YJ06/1121/result/gt/stationary/imu.txt", ios::app);
+    foutC2.setf(ios::fixed, ios::floatfield);
+    foutC2 << std::setprecision(9)
+           << curTime << " " << var << std::endl;
     if (var < 0.1)
     // if(cnt>20)
     {
@@ -2457,7 +2498,6 @@ void Estimator::double2vector()
                                                          para_Pose[0][5])
                                                  .toRotationMatrix());
         double y_diff = origin_R0.x() - origin_R00.x();
-
         Matrix3d rot_diff = Utility::ypr2R(Vector3d(y_diff, 0, 0));
         if (abs(abs(origin_R0.y()) - 90) < 1.0 || abs(abs(origin_R00.y()) - 90) < 1.0)
         {
@@ -3292,6 +3332,26 @@ void Estimator::optimization()
                     problem.SetParameterBlockConstant(para_Feature[feature_index]); // new
             }
 
+            // if ((DEPTH || STEREO) && it_per_frame.is_stereo)
+            // {
+            //     Vector3d pts_j_right = it_per_frame.pointRight;
+            //     if (imu_i != imu_j)
+            //     {
+            //         ProjectionTwoFrameTwoCamFactor *f = new ProjectionTwoFrameTwoCamFactor(pts_i, pts_j_right, it_per_id.feature_per_frame[0].velocity, it_per_frame.velocityRight,
+            //                                                                                it_per_id.feature_per_frame[0].cur_td, it_per_frame.cur_td);
+            //         problem.AddResidualBlock(f, loss_function, para_Pose[imu_i], para_Pose[imu_j], para_Ex_Pose[0], para_Ex_Pose[1], para_Feature[feature_index], para_Td[0]);
+            //         if (it_per_id.estimate_flag == 1)
+            //             problem.SetParameterBlockConstant(para_Feature[feature_index]); //new
+            //     }
+            //     else
+            //     {
+            //         ProjectionOneFrameTwoCamFactor *f = new ProjectionOneFrameTwoCamFactor(pts_i, pts_j_right, it_per_id.feature_per_frame[0].velocity, it_per_frame.velocityRight,
+            //                                                                                it_per_id.feature_per_frame[0].cur_td, it_per_frame.cur_td);
+            //         problem.AddResidualBlock(f, loss_function, para_Ex_Pose[0], para_Ex_Pose[1], para_Feature[feature_index], para_Td[0]);
+            //         if (it_per_id.estimate_flag == 1)
+            //             problem.SetParameterBlockConstant(para_Feature[feature_index]); //new
+            //     }
+            // }
             f_m_cnt++;
         }
     }
@@ -4496,6 +4556,26 @@ void Estimator::optimizationwithLine()
                     problem.SetParameterBlockConstant(para_Feature[feature_index]); // new
             }
 
+            // if ((DEPTH || STEREO) && it_per_frame.is_stereo)
+            // {
+            //     Vector3d pts_j_right = it_per_frame.pointRight;
+            //     if (imu_i != imu_j)
+            //     {
+            //         ProjectionTwoFrameTwoCamFactor *f = new ProjectionTwoFrameTwoCamFactor(pts_i, pts_j_right, it_per_id.feature_per_frame[0].velocity, it_per_frame.velocityRight,
+            //                                                                                it_per_id.feature_per_frame[0].cur_td, it_per_frame.cur_td);
+            //         problem.AddResidualBlock(f, loss_function, para_Pose[imu_i], para_Pose[imu_j], para_Ex_Pose[0], para_Ex_Pose[1], para_Feature[feature_index], para_Td[0]);
+            //         if (it_per_id.estimate_flag == 1)
+            //             problem.SetParameterBlockConstant(para_Feature[feature_index]); //new
+            //     }
+            //     else
+            //     {
+            //         ProjectionOneFrameTwoCamFactor *f = new ProjectionOneFrameTwoCamFactor(pts_i, pts_j_right, it_per_id.feature_per_frame[0].velocity, it_per_frame.velocityRight,
+            //                                                                                it_per_id.feature_per_frame[0].cur_td, it_per_frame.cur_td);
+            //         problem.AddResidualBlock(f, loss_function, para_Ex_Pose[0], para_Ex_Pose[1], para_Feature[feature_index], para_Td[0]);
+            //         if (it_per_id.estimate_flag == 1)
+            //             problem.SetParameterBlockConstant(para_Feature[feature_index]); //new
+            //     }
+            // }
             f_m_cnt++;
         }
     }

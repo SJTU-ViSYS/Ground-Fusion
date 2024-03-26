@@ -34,11 +34,11 @@
 #include "../factor/projectionTwoFrameOneCamFactor.h"
 #include "../factor/projectionTwoFrameTwoCamFactor.h"
 #include "../factor/projectionOneFrameTwoCamFactor.h"
-#include "../factor/projection_factor.h"
+#include "../factor/projection_factor.h" //new
 #include "../featureTracker/feature_tracker.h"
-#include "../linefeatureTracker/linefeature_tracker.h"
-#include "../factor/plane_factor.h"
-#include "../factor/motion_factor.h"
+#include "../linefeatureTracker/linefeature_tracker.h" //line
+#include "../factor/plane_factor.h"                    //new
+#include "../factor/motion_factor.h"                   //new
 #include "../factor/wheel_factor.h"
 #include "../factor/orientation_local_parameterization.h"
 
@@ -111,7 +111,7 @@ public:
     // void processImagewithline(const map<int, vector<pair<int, Eigen::Matrix<double, 8, 1>>>> &image, const double header,map<int, vector<pair<int, Vector4d>>>&linefeature);
     void processImagewithline(const map<int, vector<pair<int, Eigen::Matrix<double, 8, 1>>>> &image, const double header, const map<int, vector<pair<int, Vector4d>>> &linefeature);
     void processMeasurements();
-    void inputWheel(double t, const Vector3d &linearVelocity, const Vector3d &angularVelocity);
+    void inputWheel(double t, const Vector3d &linearVelocity, const Vector3d &angularVelocity); // new below
     void inputGNSS(double t, std::vector<ObsPtr> meas_msg);
     void inputrawodom(double t, const Vector3d &wheel_xyz);
     // void inputGroundtruth(double t, Eigen::Matrix<double, 7, 1>& data);
@@ -185,13 +185,18 @@ public:
     // anomaly
     Eigen::Vector3d dP_wheel, dP_imu, P_wheel_tmp, P_imu_tmp;
 
+    // dP_wheel.setZero();
+    // dP_imu.setZero();
+    // P_wheel_tmp.setZero();
+    // P_imu_tmp.setZero();
+
     // line
     double frame_cnt_ = 0;
     double sum_solver_time_ = 0.0;
     double mean_solver_time_ = 0.0;
     double sum_marg_time_ = 0.0;
     double mean_marg_time_ = 0.0;
-
+    // new
     std::mutex mGTBuf;
     std::mutex mWheelBuf;
     std::mutex mRawodomBuf;
@@ -240,7 +245,7 @@ public:
     Eigen::Vector3d latest_P_wheel, latest_V_wheel, latest_vel_wheel_0, latest_gyr_wheel_0;
     double latest_sx, latest_sy, latest_sw;
     Eigen::Quaterniond latest_Q_wheel;
-
+    // new above
     queue<pair<double, Eigen::Vector3d>> accBuf;
     queue<pair<double, Eigen::Vector3d>> gyrBuf;
     queue<pair<double, map<int, vector<pair<int, Eigen::Matrix<double, 8, 1>>>>>> featureBuf;

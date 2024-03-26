@@ -21,9 +21,9 @@ public:
     bool getGridLogBel(const double& x, const double& y, double& log_bel);
     double getCellSize();
    
-    //void toRosOccGridMap(const std::string& frame_id, nav_msgs::OccupancyGrid& occ_grid); 
-    cv::Mat toCvMat();
-    void saveMap(const std::string& img_dir, const std::string& cfg_dir); 
+    //void toRosOccGridMap(const std::string& frame_id, nav_msgs::OccupancyGrid& occ_grid); //转换到Ros栅格地图的消息
+    cv::Mat toCvMat(); //转换到Opencv的图片格式
+    void saveMap(const std::string& img_dir, const std::string& cfg_dir); // 保存地图，图片加配置文件的形式
     void loadMap(const std::string& img_dir, const std::string& cfg_dir); 
     
 private:

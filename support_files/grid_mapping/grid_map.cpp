@@ -20,8 +20,7 @@ bool GridMap::getIdx ( const double& x, const double& y, Eigen::Vector2i& idx )
 {
     int xidx = cvFloor( x / cell_size_ ) + init_x_;
     int yidx  = cvFloor( y /cell_size_ )+ init_y_;
-    
-   
+
     if((xidx < 0) || (yidx < 0) || (xidx >= size_x_) || (yidx >= size_y_)){
         cout << xidx << " " << yidx << endl;
         return false;

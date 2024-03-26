@@ -1,8 +1,8 @@
 /*******************************************************
  * Copyright (C) 2019, Aerial Robotics Group, Hong Kong University of Science and Technology
- * 
+ *
  * This file is part of VINS.
- * 
+ *
  * Licensed under the GNU General Public License v3.0;
  * you may not use this file except in compliance with the License.
  *******************************************************/
@@ -32,7 +32,7 @@
 
 extern ros::Publisher pub_odometry;
 extern ros::Publisher pub_path, pub_pose;
-//extern ros::Publisher pub_groundtruth;
+// extern ros::Publisher pub_groundtruth;
 extern ros::Publisher pub_cloud, pub_map;
 extern ros::Publisher pub_key_poses;
 extern ros::Publisher pub_ref_pose, pub_cur_pose;
@@ -57,12 +57,13 @@ void printStatistics(const Estimator &estimator, double t);
 
 void pubOdometry(const Estimator &estimator, const std_msgs::Header &header);
 
-
-void pubWheelPreintegration(const Eigen::Vector3d& P, const Eigen::Quaterniond& Q,const std_msgs::Header &header);
+// void pubGroundTruth(Estimator &estimator, const std_msgs::Header &header, Eigen::Matrix<double, 7, 1>& pose, const double td);//仿真用
+// 将预积分数据进行预积分，测试预积分正确性
+void pubWheelPreintegration(const Eigen::Vector3d &P, const Eigen::Quaterniond &Q, const std_msgs::Header &header);
 void pubPureWheelPreintegration(const Eigen::Vector3d &P, const Eigen::Quaterniond &Q, const std_msgs::Header &header);
-void pubIMUPreintegration(const Eigen::Vector3d& P, const Eigen::Quaterniond& Q,const std_msgs::Header &header);
-void pubPureIMUPreintegration(const Eigen::Vector3d& P, const Eigen::Quaterniond& Q,const std_msgs::Header &header);
-void pubWheelRawodom(const Eigen::Vector3d& P, const Eigen::Quaterniond& Q,const std_msgs::Header &header);
+void pubIMUPreintegration(const Eigen::Vector3d &P, const Eigen::Quaterniond &Q, const std_msgs::Header &header);
+void pubPureIMUPreintegration(const Eigen::Vector3d &P, const Eigen::Quaterniond &Q, const std_msgs::Header &header);
+void pubWheelRawodom(const Eigen::Vector3d &P, const Eigen::Quaterniond &Q, const std_msgs::Header &header);
 void pubInitialGuess(const Estimator &estimator, const std_msgs::Header &header);
 
 void pubKeyPoses(const Estimator &estimator, const std_msgs::Header &header);
@@ -70,13 +71,13 @@ void pubKeyPoses(const Estimator &estimator, const std_msgs::Header &header);
 void pubCameraPose(const Estimator &estimator, const std_msgs::Header &header);
 
 void pubPointCloud(const Estimator &estimator, const std_msgs::Header &header);
-void pubLinesCloud(const Estimator &estimator, const std_msgs::Header &header);
+void pubLinesCloud(const Estimator &estimator, const std_msgs::Header &header); // new
 void pubTF(const Estimator &estimator, const std_msgs::Header &header);
 
 void pubKeyframe(const Estimator &estimator);
 
 void pubRelocalization(const Estimator &estimator);
 
-void pubCar(const Estimator & estimator, const std_msgs::Header &header);
+void pubCar(const Estimator &estimator, const std_msgs::Header &header);
 
 void pubGnssResult(const Estimator &estimator, const std_msgs::Header &header);

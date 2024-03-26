@@ -280,7 +280,7 @@ bool VisualIMUAlignmentWithDepth(map<double, ImageFrame> &all_image_frame, Vecto
         return false;
 }
 
-void RefineGravityWithWheel(map<double, ImageFrame> &all_image_frame, Vector3d &g, VectorXd &x)
+void RefineGravityWithWheel(map<double, ImageFrame> &all_image_frame, Vector3d &g, VectorXd &x) // new
 {
     Vector3d g0 = g.normalized() * G.norm();
     Vector3d lx, ly;
@@ -424,7 +424,7 @@ bool LinearAlignmentWithWheel(map<double, ImageFrame> &all_image_frame, Vector3d
     return s >= 0.0;
 }
 
-void RefineGravityWithWD(map<double, ImageFrame> &all_image_frame, Vector3d &g, VectorXd &x)
+void RefineGravityWithWD(map<double, ImageFrame> &all_image_frame, Vector3d &g, VectorXd &x) // new
 {
     Vector3d g0 = g.normalized() * G.norm();
     Vector3d lx, ly;
@@ -641,13 +641,18 @@ bool VisualIMUAlignment(map<double, ImageFrame> &all_image_frame, Vector3d *Bgs,
 {
     solveGyroscopeBias(all_image_frame, Bgs);
 
-    if (USE_WHEEL and DEPTH)
+    if (USE_WHEEL and DEPTH) // new
         return LinearAlignmentWithWD(all_image_frame, g, x);
 
     else if (USE_WHEEL and !DEPTH)
-        return LinearAlignmentWithWheel(all_image_frame, g, x);
+        return LinearAlignmentWithWheel(all_image_frame, g, x); // new
     else if (DEPTH and !USE_WHEEL)
         return LinearAlignmentWithDepth(all_image_frame, g, x);
     else
         return LinearAlignment(all_image_frame, g, x);
+
+    // return LinearAlignment(all_image_frame, g, x);
+
+    // eturn LinearAlignment(all_image_frame, g, x);//new
+    // return LinearAlignmentWithDepth(all_image_frame, g, x);//new
 }

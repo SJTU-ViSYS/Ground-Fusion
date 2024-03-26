@@ -45,7 +45,7 @@ Vector6d orth_to_line(Vector4d orth)
 
     double w1 = cos(phi);
     double w2 = sin(phi);
-    double d = w1 / w2;
+    double d = w1 / w2; // 原点到直线的距离
 
     line.head(3) = -R.col(2) * d;
     line.tail(3) = R.col(1);
@@ -95,7 +95,8 @@ Vector6d orth_to_plk(Vector4d orth)
 
     double w1 = cos(phi);
     double w2 = sin(phi);
-    double d = w1 / w2;
+    double d = w1 / w2; // 原点到直线的距离
+
     Vector3d u1 = R.col(0);
     Vector3d u2 = R.col(1);
 
@@ -112,6 +113,12 @@ Vector6d orth_to_plk(Vector4d orth)
     return plk;
 }
 
+/*
+ 三点确定一个平面 a(x-x0)+b(y-y0)+c(z-z0)=0  --> ax + by + cz + d = 0   d = -(ax0 + by0 + cz0)
+ 平面通过点（x0,y0,z0）以及垂直于平面的法线（a,b,c）来得到
+ (a,b,c)^T = vector(AO) cross vector(BO)
+ d = O.dot(cross(AO,BO))
+ */
 Vector4d pi_from_ppp(Vector3d x1, Vector3d x2, Vector3d x3)
 {
     Vector4d pi;
@@ -120,6 +127,7 @@ Vector4d pi_from_ppp(Vector3d x1, Vector3d x2, Vector3d x3)
     return pi;
 }
 
+// 两平面相交得到直线的plucker 坐标
 Vector6d pipi_plk(Vector4d pi1, Vector4d pi2)
 {
     Vector6d plk;
@@ -129,6 +137,7 @@ Vector6d pipi_plk(Vector4d pi1, Vector4d pi2)
     return plk;
 }
 
+// 获取光心到直线的垂直点
 Vector3d plucker_origin(Vector3d n, Vector3d v)
 {
     return v.cross(n) / v.dot(v);
@@ -146,6 +155,7 @@ Vector3d point_to_pose(Eigen::Matrix3d Rcw, Eigen::Vector3d tcw, Vector3d pt_w)
     return Rcw * pt_w + tcw;
 }
 
+// 从相机坐标系到世界坐标系
 Vector3d poit_from_pose(Eigen::Matrix3d Rcw, Eigen::Vector3d tcw, Vector3d pt_c)
 {
 
@@ -178,6 +188,7 @@ Vector6d line_from_pose(Vector6d line_c, Eigen::Matrix3d Rcw, Eigen::Vector3d tc
     return line_to_pose(line_c, Rwc, twc);
 }
 
+// 世界坐标系到相机坐标系下
 Vector6d plk_to_pose(Vector6d plk_w, Eigen::Matrix3d Rcw, Eigen::Vector3d tcw)
 {
     Vector3d nw = plk_w.head(3);

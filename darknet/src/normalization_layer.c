@@ -96,7 +96,7 @@ void forward_normalization_layer(const layer layer, network net)
 
 void backward_normalization_layer(const layer layer, network net)
 {
- 
+   
     int w = layer.w;
     int h = layer.h;
     int c = layer.c;
@@ -138,7 +138,8 @@ void forward_normalization_layer_gpu(const layer layer, network net)
 
 void backward_normalization_layer_gpu(const layer layer, network net)
 {
-   
+    // TODO This is approximate ;-)
+
     int w = layer.w;
     int h = layer.h;
     int c = layer.c;

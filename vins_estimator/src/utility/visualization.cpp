@@ -11,13 +11,13 @@
 
 using namespace ros;
 using namespace Eigen;
-ros::Publisher pub_odometry, pub_latest_odometry,pub_latest_pure_odometry, pub_latest_wheel_odometry, pub_latest_pure_wheel_odometry;
+ros::Publisher pub_odometry, pub_latest_odometry, pub_latest_pure_odometry, pub_latest_wheel_odometry, pub_latest_pure_wheel_odometry;
 ros::Publisher pub_lines, pub_marg_lines;
 ros::Publisher pub_path;
 // ros::Publisher pub_groundtruth;
 ros::Publisher pub_wheel_preintegration;
 ros::Publisher pub_pure_wheel_preintegration;
-ros::Publisher pub_imu_preintegration,pub_pure_imu_preintegration;
+ros::Publisher pub_imu_preintegration, pub_pure_imu_preintegration;
 ros::Publisher pub_wheel_rawodom;
 ros::Publisher pub_point_cloud, pub_margin_cloud;
 ros::Publisher pub_key_poses;
@@ -32,7 +32,7 @@ ros::Publisher pub_extrinsic;
 
 ros::Publisher pub_image_track;
 
-//gnss new
+// gnss new
 ros::Publisher pub_gnss_lla;
 ros::Publisher pub_enu_path, pub_rtk_enu_path;
 nav_msgs::Path enu_path, rtk_enu_path;
@@ -49,7 +49,7 @@ size_t pub_counter = 0;
 
 void registerPub(ros::NodeHandle &n)
 {
-    //gnss new
+    // gnss new
     pub_gnss_lla = n.advertise<sensor_msgs::NavSatFix>("gnss_fused_lla", 1000);
     pub_enu_path = n.advertise<nav_msgs::Path>("gnss_enu_path", 1000);
     pub_anc_lla = n.advertise<sensor_msgs::NavSatFix>("gnss_anchor_lla", 1000);
@@ -290,8 +290,8 @@ void printStatistics(const Estimator &estimator, double t)
 
 void pubOdometry(const Estimator &estimator, const std_msgs::Header &header)
 {
-    //cout<<"reach here"<<endl;
-    if (estimator.solver_flag == Estimator::SolverFlag::NON_LINEAR||(is_imu_excited))
+    // cout<<"reach here"<<endl;
+    if (estimator.solver_flag == Estimator::SolverFlag::NON_LINEAR || (is_imu_excited))
     {
 
         nav_msgs::Odometry odometry;
@@ -359,8 +359,8 @@ void pubOdometry(const Estimator &estimator, const std_msgs::Header &header)
         printf("time: %f, t: %f %f %f q: %f %f %f %f \n", header.stamp.toSec(), tmp_T.x, tmp_T.y, tmp_T.z,
                tmp_Q.w(), tmp_Q.x(), tmp_Q.y(), tmp_Q.z());
 
-               foutC.close();
-               pubGnssResult(estimator, header);
+        foutC.close();
+        pubGnssResult(estimator, header);
     }
 }
 // void pubGroundTruth(Estimator &estimator, const std_msgs::Header &header, Eigen::Matrix<double, 7, 1>& pose, const double td)
@@ -453,14 +453,15 @@ void pubOdometry(const Estimator &estimator, const std_msgs::Header &header)
 // }
 void pubGnssResult(const Estimator &estimator, const std_msgs::Header &header)
 {
-    if (!estimator.gnss_ready)      return;
+    if (!estimator.gnss_ready)
+        return;
     // publish GNSS LLA
-    const double gnss_ts = estimator.Headers[WINDOW_SIZE] + 
-        estimator.diff_t_gnss_local;
+    const double gnss_ts = estimator.Headers[WINDOW_SIZE] +
+                           estimator.diff_t_gnss_local;
     Eigen::Vector3d lla_pos = ecef2geo(estimator.ecef_pos);
-    //cout<<"lla pos here"<<estimator.ecef_pos<<endl; //no problem
-    //printf("global time: %f\n", gnss_ts);
-    //printf("latitude longitude altitude: %f, %f, %f\n", lla_pos.x(), lla_pos.y(), lla_pos.z());
+    // cout<<"lla pos here"<<estimator.ecef_pos<<endl; //no problem
+    // printf("global time: %f\n", gnss_ts);
+    // printf("latitude longitude altitude: %f, %f, %f\n", lla_pos.x(), lla_pos.y(), lla_pos.z());
     sensor_msgs::NavSatFix gnss_lla_msg;
     gnss_lla_msg.header.stamp = ros::Time(gnss_ts);
     gnss_lla_msg.header.frame_id = "geodetic";
@@ -471,7 +472,7 @@ void pubGnssResult(const Estimator &estimator, const std_msgs::Header &header)
 
     // publish anchor LLA
     const Eigen::Vector3d anc_lla = ecef2geo(estimator.anc_ecef);
-    //cout<<"ecef pos here"<<estimator.anc_ecef<<endl;//all zero
+    // cout<<"ecef pos here"<<estimator.anc_ecef<<endl;//all zero
     sensor_msgs::NavSatFix anc_lla_msg;
     anc_lla_msg.header = gnss_lla_msg.header;
     anc_lla_msg.latitude = anc_lla.x();
@@ -483,13 +484,13 @@ void pubGnssResult(const Estimator &estimator, const std_msgs::Header &header)
     geometry_msgs::PoseStamped enu_pose_msg;
     // camera-front orientation
     Eigen::Matrix3d R_s_c;
-    R_s_c <<  0,  0,  1,
-             -1,  0,  0,
-              0, -1,  0;
+    R_s_c << 0, 0, 1,
+        -1, 0, 0,
+        0, -1, 0;
     Eigen::Matrix3d R_w_sensor = estimator.Rs[WINDOW_SIZE] * estimator.ric[0] * R_s_c.transpose();
     Eigen::Quaterniond enu_ori(estimator.R_enu_local * R_w_sensor);
     enu_pose_msg.header.stamp = header.stamp;
-    enu_pose_msg.header.frame_id = "world";     // "enu" will more meaningful, but for viz
+    enu_pose_msg.header.frame_id = "world"; // "enu" will more meaningful, but for viz
     enu_pose_msg.pose.position.x = estimator.enu_pos.x();
     enu_pose_msg.pose.position.y = estimator.enu_pos.y();
     enu_pose_msg.pose.position.z = estimator.enu_pos.z();
@@ -520,30 +521,28 @@ void pubGnssResult(const Estimator &estimator, const std_msgs::Header &header)
     // write GNSS result to file
     ofstream gnss_output(GNSS_RESULT_PATH, ios::app);
 
-      gnss_output.setf(ios::fixed, ios::floatfield);
+    gnss_output.setf(ios::fixed, ios::floatfield);
     gnss_output.precision(9);
     gnss_output << header.stamp.toSec() << ' ';
-    //gnss_output << gnss_ts * 1e9 << ',';
+    // gnss_output << gnss_ts * 1e9 << ',';
     gnss_output.precision(9);
     gnss_output << estimator.ecef_pos(0) << ' '
                 << estimator.ecef_pos(1) << ' '
                 << estimator.ecef_pos(2) << ' '
                 << 0.000000000 << " "
-        << 0.000000000 << " "
-        << 0.000000000 << " "
-        << 0.000000000 << std::endl;
+                << 0.000000000 << " "
+                << 0.000000000 << " "
+                << 0.000000000 << std::endl;
 
-
-                // << estimator.yaw_enu_local << ','
-                // << estimator.para_rcv_dt[(WINDOW_SIZE)*4+0] << ','
-                // << estimator.para_rcv_dt[(WINDOW_SIZE)*4+1] << ','
-                // << estimator.para_rcv_dt[(WINDOW_SIZE)*4+2] << ','
-                // << estimator.para_rcv_dt[(WINDOW_SIZE)*4+3] << ','
-                // << estimator.para_rcv_ddt[WINDOW_SIZE] << ','
-                // << estimator.anc_ecef(0) << ','
-                // << estimator.anc_ecef(1) << ','
-                // << estimator.anc_ecef(2) << '\n';
-
+    // << estimator.yaw_enu_local << ','
+    // << estimator.para_rcv_dt[(WINDOW_SIZE)*4+0] << ','
+    // << estimator.para_rcv_dt[(WINDOW_SIZE)*4+1] << ','
+    // << estimator.para_rcv_dt[(WINDOW_SIZE)*4+2] << ','
+    // << estimator.para_rcv_dt[(WINDOW_SIZE)*4+3] << ','
+    // << estimator.para_rcv_ddt[WINDOW_SIZE] << ','
+    // << estimator.anc_ecef(0) << ','
+    // << estimator.anc_ecef(1) << ','
+    // << estimator.anc_ecef(2) << '\n';
 
     // gnss_output.setf(ios::fixed, ios::floatfield);
     // gnss_output.precision(0);
@@ -621,7 +620,6 @@ void pubWheelPreintegration(const Eigen::Vector3d &P, const Eigen::Quaterniond &
     preintegration_path.poses.push_back(pose_stamped);
     pub_wheel_preintegration.publish(preintegration_path);
 }
-
 
 void pubPureWheelPreintegration(const Eigen::Vector3d &P, const Eigen::Quaterniond &Q, const std_msgs::Header &header)
 {
@@ -1018,7 +1016,7 @@ void pubPointCloud(const Estimator &estimator, const std_msgs::Header &header)
     }
     ROS_INFO("good point size: %d", point_cloud.points.size());
     double curTime = header.stamp.toSec();
-   
+
     pub_point_cloud.publish(point_cloud);
 
     // pub margined potin
@@ -1085,7 +1083,7 @@ void pubTF(const Estimator &estimator, const std_msgs::Header &header)
     br.sendTransform(tf::StampedTransform(transform, header.stamp, "body", "camera"));
 
     // wheel frame
-    if (USE_WHEEL && !ONLY_INITIAL_WITH_WHEEL&&wheel_ready)
+    if (USE_WHEEL && !ONLY_INITIAL_WITH_WHEEL && wheel_ready)
     {
         transform.setOrigin(tf::Vector3(estimator.tio.x(),
                                         estimator.tio.y(),

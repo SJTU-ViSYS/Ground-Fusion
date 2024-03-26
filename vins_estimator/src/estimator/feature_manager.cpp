@@ -67,6 +67,12 @@ bool FeatureManager::addFeatureCheckParallax(int frame_count, const map<int, vec
     for (auto &id_pts : image)
     {
         FeaturePerFrame f_per_fra(id_pts.second[0].second, td);
+        // assert(id_pts.second[0].first == 0);//new zhushi
+        // if(id_pts.second.size() == 2)
+        // {
+        //     f_per_fra.rightObservation(id_pts.second[1].second);
+        //     assert(id_pts.second[1].first == 1);//aussme right has obs
+        // }
 
         int feature_id = id_pts.first;
         auto it = find_if(feature.begin(), feature.end(), [feature_id](const FeaturePerId &it)
@@ -1325,11 +1331,12 @@ void FeatureManager::removeLineOutlier()
         it_next++;
         it_per_id->used_num = it_per_id->linefeature_per_frame.size();
 
-        if (it_per_id->is_triangulation || it_per_id->used_num < 2)
+        if (it_per_id->is_triangulation || it_per_id->used_num < 2) // 已经三角化了 或者 少于两帧看到 或者 右目没有看到
             continue;
 
         int imu_i = it_per_id->start_frame, imu_j = imu_i - 1;
 
+        // 计算初始帧上线段对应的3d端点
         Vector3d pc, nc, vc;
         nc = it_per_id->line_plucker.head(3);
         vc = it_per_id->line_plucker.tail(3);
@@ -1337,13 +1344,13 @@ void FeatureManager::removeLineOutlier()
         Matrix4d Lc;
         Lc << skew_symmetric(nc), vc, -vc.transpose(), 0;
 
-        Vector4d obs_startframe = it_per_id->linefeature_per_frame[0].lineobs;
+        Vector4d obs_startframe = it_per_id->linefeature_per_frame[0].lineobs; // 第一次观测到这帧
         Vector3d p11 = Vector3d(obs_startframe(0), obs_startframe(1), 1.0);
         Vector3d p21 = Vector3d(obs_startframe(2), obs_startframe(3), 1.0);
-        Vector2d ln = (p11.cross(p21)).head(2);
+        Vector2d ln = (p11.cross(p21)).head(2); // 直线的垂直方向
         ln = ln / ln.norm();
 
-        Vector3d p12 = Vector3d(p11(0) + ln(0), p11(1) + ln(1), 1.0);
+        Vector3d p12 = Vector3d(p11(0) + ln(0), p11(1) + ln(1), 1.0); // 直线垂直方向上移动一个单位
         Vector3d p22 = Vector3d(p21(0) + ln(0), p21(1) + ln(1), 1.0);
         Vector3d cam = Vector3d(0, 0, 0);
 
@@ -1366,6 +1373,15 @@ void FeatureManager::removeLineOutlier()
             linefeature.erase(it_per_id);
             continue;
         }
+        /*
+                // 点到直线的距离不能太远啊
+                Vector3d Q = plucker_origin(nc,vc);
+                if(Q.norm() > 5.0)
+                {
+                    linefeature.erase(it_per_id);
+                    continue;
+                }
+        */
     }
 }
 
@@ -1387,6 +1403,7 @@ void FeatureManager::removeLineOutlier(Vector3d Ps[], Vector3d tic[], Matrix3d r
         Eigen::Vector3d twc = Ps[imu_i] + Rs[imu_i] * tic[0]; // twc = Rwi * tic + twi
         Eigen::Matrix3d Rwc = Rs[imu_i] * ric[0];             // Rwc = Rwi * Ric
 
+        // 计算初始帧上线段对应的3d端点
         Vector3d pc, nc, vc;
         nc = it_per_id->line_plucker.head(3);
         vc = it_per_id->line_plucker.tail(3);
@@ -1402,13 +1419,13 @@ void FeatureManager::removeLineOutlier(Vector3d Ps[], Vector3d tic[], Matrix3d r
         Matrix4d Lc;
         Lc << skew_symmetric(nc), vc, -vc.transpose(), 0;
 
-        Vector4d obs_startframe = it_per_id->linefeature_per_frame[0].lineobs;
+        Vector4d obs_startframe = it_per_id->linefeature_per_frame[0].lineobs; // 第一次观测到这帧
         Vector3d p11 = Vector3d(obs_startframe(0), obs_startframe(1), 1.0);
         Vector3d p21 = Vector3d(obs_startframe(2), obs_startframe(3), 1.0);
-        Vector2d ln = (p11.cross(p21)).head(2);
+        Vector2d ln = (p11.cross(p21)).head(2); // 直线的垂直方向
         ln = ln / ln.norm();
 
-        Vector3d p12 = Vector3d(p11(0) + ln(0), p11(1) + ln(1), 1.0);
+        Vector3d p12 = Vector3d(p11(0) + ln(0), p11(1) + ln(1), 1.0); // 直线垂直方向上移动一个单位
         Vector3d p22 = Vector3d(p21(0) + ln(0), p21(1) + ln(1), 1.0);
         Vector3d cam = Vector3d(0, 0, 0);
 
@@ -1432,6 +1449,16 @@ void FeatureManager::removeLineOutlier(Vector3d Ps[], Vector3d tic[], Matrix3d r
             continue;
         }
 
+        /*
+                // 点到直线的距离不能太远啊
+                Vector3d Q = plucker_origin(nc,vc);
+                if(Q.norm() > 5.0)
+                {
+                    linefeature.erase(it_per_id);
+                    continue;
+                }
+        */
+        // 并且平均投影误差不能太大啊
         Vector6d line_w = plk_to_pose(it_per_id->line_plucker, Rwc, twc); // transfrom to world frame
 
         int i = 0;
@@ -1441,7 +1468,7 @@ void FeatureManager::removeLineOutlier(Vector3d Ps[], Vector3d tic[], Matrix3d r
         Eigen::Vector4d obs;
 
         // std::cout<<"reprojection_error: \n";
-        for (auto &it_per_frame : it_per_id->linefeature_per_frame)
+        for (auto &it_per_frame : it_per_id->linefeature_per_frame) // 遍历所有的观测， 注意 start_frame 也会被遍历
         {
             imu_j++;
 
@@ -1451,7 +1478,11 @@ void FeatureManager::removeLineOutlier(Vector3d Ps[], Vector3d tic[], Matrix3d r
 
             double err = reprojection_error(obs, R1, t1, line_w);
 
-            if (allerr < err)
+            //            if(err > 0.0000001)
+            //                i++;
+            //            allerr += err;    // 计算平均投影误差
+
+            if (allerr < err) // 记录最大投影误差，如果最大的投影误差比较大，那就说明有outlier
                 allerr = err;
         }
         //        allerr = allerr / i;
@@ -1472,18 +1503,18 @@ void FeatureManager::removeBackShiftDepthline(Eigen::Matrix3d marg_R, Eigen::Vec
     {
         it_next++;
 
-        if (it->start_frame != 0)
+        if (it->start_frame != 0) // 如果特征不是在这帧上初始化的，那就不用管，只要管id--
             it->start_frame--;
         else
         {
             Eigen::Vector3d uv_i = it->feature_per_frame[0].point;
             it->feature_per_frame.erase(it->feature_per_frame.begin());
-            if (it->feature_per_frame.size() < 2)
+            if (it->feature_per_frame.size() < 2) // 如果观测到这个帧的图像少于两帧，那这个特征不要了
             {
                 feature.erase(it);
                 continue;
             }
-            else
+            else // 如果还有很多帧看到它，而我们又把这个特征的初始化帧给marg掉了，那就得把这个特征转挂到下一帧上去, 这里 marg_R, new_R 都是相应时刻的相机坐标系到世界坐标系的变换
             {
                 Eigen::Vector3d pts_i = uv_i * it->estimated_depth;
                 Eigen::Vector3d w_pts_i = marg_R * pts_i + marg_P;
@@ -1495,35 +1526,114 @@ void FeatureManager::removeBackShiftDepthline(Eigen::Matrix3d marg_R, Eigen::Vec
                     it->estimated_depth = INIT_DEPTH;
             }
         }
-
-        for (auto it = linefeature.begin(), it_next = linefeature.begin();
-             it != linefeature.end(); it = it_next)
+        // remove tracking-lost feature after marginalize
+        /*
+        if (it->endFrame() < WINDOW_SIZE - 1)
         {
-            it_next++;
+            feature.erase(it);
+        }
+        */
+    }
 
-            if (it->start_frame != 0)
-            {
-                it->start_frame--;
-            }
-            else
-            {
+    // new above
+    for (auto it = linefeature.begin(), it_next = linefeature.begin();
+         it != linefeature.end(); it = it_next)
+    {
+        it_next++;
 
-                it->linefeature_per_frame.erase(it->linefeature_per_frame.begin());
-                if (it->linefeature_per_frame.size() < 2)
-                {
-                    linefeature.erase(it);
-                    continue;
-                }
-                else
-                {
-                    it->removed_cnt++;
-                    // transpose this line to the new pose
-                    Matrix3d Rji = new_R.transpose() * marg_R; // Rcjw * Rwci
-                    Vector3d tji = new_R.transpose() * (marg_P - new_P);
-                    Vector6d plk_j = plk_to_pose(it->line_plucker, Rji, tji);
-                    it->line_plucker = plk_j;
-                }
+        if (it->start_frame != 0) // 如果特征不是在这帧上初始化的，那就不用管，只要管id--
+        {
+            it->start_frame--;
+        }
+        else
+        {
+            /*
+                        //  used to debug
+                        Vector3d pc, nc, vc;
+                        nc = it->line_plucker.head(3);
+                        vc = it->line_plucker.tail(3);
+
+                        Matrix4d Lc;
+                        Lc << skew_symmetric(nc), vc, -vc.transpose(), 0;
+
+                        Vector4d obs_startframe = it->linefeature_per_frame[0].lineobs;   // 第一次观测到这帧
+                        Vector3d p11 = Vector3d(obs_startframe(0), obs_startframe(1), 1.0);
+                        Vector3d p21 = Vector3d(obs_startframe(2), obs_startframe(3), 1.0);
+                        Vector2d ln = ( p11.cross(p21) ).head(2);     // 直线的垂直方向
+                        ln = ln / ln.norm();
+
+                        Vector3d p12 = Vector3d(p11(0) + ln(0), p11(1) + ln(1), 1.0);  // 直线垂直方向上移动一个单位
+                        Vector3d p22 = Vector3d(p21(0) + ln(0), p21(1) + ln(1), 1.0);
+                        Vector3d cam = Vector3d( 0, 0, 0 );
+
+                        Vector4d pi1 = pi_from_ppp(cam, p11, p12);
+                        Vector4d pi2 = pi_from_ppp(cam, p21, p22);
+
+                        Vector4d e1 = Lc * pi1;
+                        Vector4d e2 = Lc * pi2;
+                        e1 = e1/e1(3);
+                        e2 = e2/e2(3);
+
+                        Vector3d pts_1(e1(0),e1(1),e1(2));
+                        Vector3d pts_2(e2(0),e2(1),e2(2));
+
+                        Vector3d w_pts_1 =  marg_R * pts_1 + marg_P;
+                        Vector3d w_pts_2 =  marg_R * pts_2 + marg_P;
+
+                        std::cout<<"-------------------------------\n";
+                        std::cout << w_pts_1 << "\n" <<w_pts_2 <<"\n\n";
+                        Vector4d obs_startframe = it->linefeature_per_frame[0].lineobs;   // 第一次观测到这帧
+                        */
+            //-----------------
+            it->linefeature_per_frame.erase(it->linefeature_per_frame.begin()); // 移除观测
+            if (it->linefeature_per_frame.size() < 2)                           // 如果观测到这个帧的图像少于两帧，那这个特征不要了
+            {
+                linefeature.erase(it);
+                continue;
             }
+            else // 如果还有很多帧看到它，而我们又把这个特征的初始化帧给marg掉了，那就得把这个特征转挂到下一帧上去, 这里 marg_R, new_R 都是相应时刻的相机坐标系到世界坐标系的变换
+            {
+                it->removed_cnt++;
+                // transpose this line to the new pose
+                Matrix3d Rji = new_R.transpose() * marg_R; // Rcjw * Rwci
+                Vector3d tji = new_R.transpose() * (marg_P - new_P);
+                Vector6d plk_j = plk_to_pose(it->line_plucker, Rji, tji);
+                it->line_plucker = plk_j;
+            }
+            //-----------------------
+            /*
+                        //  used to debug
+                        nc = it->line_plucker.head(3);
+                        vc = it->line_plucker.tail(3);
+
+                        Lc << skew_symmetric(nc), vc, -vc.transpose(), 0;
+
+                        obs_startframe = it->linefeature_per_frame[0].lineobs;   // 第一次观测到这帧
+                        p11 = Vector3d(obs_startframe(0), obs_startframe(1), 1.0);
+                        p21 = Vector3d(obs_startframe(2), obs_startframe(3), 1.0);
+                        ln = ( p11.cross(p21) ).head(2);     // 直线的垂直方向
+                        ln = ln / ln.norm();
+
+                        p12 = Vector3d(p11(0) + ln(0), p11(1) + ln(1), 1.0);  // 直线垂直方向上移动一个单位
+                        p22 = Vector3d(p21(0) + ln(0), p21(1) + ln(1), 1.0);
+                        cam = Vector3d( 0, 0, 0 );
+
+                        pi1 = pi_from_ppp(cam, p11, p12);
+                        pi2 = pi_from_ppp(cam, p21, p22);
+
+                        e1 = Lc * pi1;
+                        e2 = Lc * pi2;
+                        e1 = e1/e1(3);
+                        e2 = e2/e2(3);
+
+                        pts_1 = Vector3d(e1(0),e1(1),e1(2));
+                        pts_2 = Vector3d(e2(0),e2(1),e2(2));
+
+                        w_pts_1 =  new_R * pts_1 + new_P;
+                        w_pts_2 =  new_R * pts_2 + new_P;
+
+                        std::cout << w_pts_1 << "\n" <<w_pts_2 <<"\n";
+            */
         }
     }
 }

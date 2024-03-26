@@ -561,7 +561,7 @@ map<int, vector<pair<int, Eigen::Matrix<double, 8, 1>>>> FeatureTracker::trackIm
             velocity_x = pts_velocity[i].x;
             velocity_y = pts_velocity[i].y;
 
-            // 在这里加入box的遍历，判断是否在轮廓内即可
+            //在这里加入box的遍历，判断是否在轮廓内即可
             darknet_ros_msgs::BoundingBoxesConstPtr boxes = _boxes;
 
             darknet_ros_msgs::BoundingBox box = boxes->bounding_boxes.front();
@@ -627,7 +627,9 @@ map<int, vector<pair<int, Eigen::Matrix<double, 8, 1>>>> FeatureTracker::trackIm
             depth_value = depth_value / 1000;
             // cout << "depth value" << depth_value << endl;
 
-            // 在这里加入box的遍历，判断是否在轮廓内即可
+
+//new 1024
+                      //在这里加入box的遍历，判断是否在轮廓内即可
             darknet_ros_msgs::BoundingBoxesConstPtr boxes = _boxes;
 
             darknet_ros_msgs::BoundingBox box = boxes->bounding_boxes.front();
@@ -666,10 +668,10 @@ map<int, vector<pair<int, Eigen::Matrix<double, 8, 1>>>> FeatureTracker::trackIm
             else
             {
 
-                Eigen::Matrix<double, 8, 1> xyz_uv_velocity;
-                xyz_uv_velocity << x, y, z, p_u, p_v, velocity_x, velocity_y, depth_value;
-                featureFrame[feature_id].emplace_back(camera_id, xyz_uv_velocity);
-            }
+            Eigen::Matrix<double, 8, 1> xyz_uv_velocity;
+            xyz_uv_velocity << x, y, z, p_u, p_v, velocity_x, velocity_y, depth_value;
+            featureFrame[feature_id].emplace_back(camera_id, xyz_uv_velocity);
+        }
         }
     }
 
@@ -746,11 +748,8 @@ void FeatureTracker::readIntrinsicParameter(const vector<string> &calib_file, co
 {
     for (size_t i = 0; i < calib_file.size(); i++)
     {
-
         ROS_INFO("reading paramerter of camera %s", calib_file[i].c_str());
         camodocal::CameraPtr camera = CameraFactory::instance()->generateCameraFromYamlFile(calib_file[i]);
-        std::cout << "Testky" << std::endl;
-
         m_camera.push_back(camera);
     }
     if (calib_file.size() == 2)
@@ -758,6 +757,7 @@ void FeatureTracker::readIntrinsicParameter(const vector<string> &calib_file, co
     if (depth)
         depth_cam = 1;
 }
+
 void FeatureTracker::showUndistortion(const string &name)
 {
     cv::Mat undistortedImg(row + 600, col + 600, CV_8UC1, cv::Scalar(0));
@@ -913,7 +913,7 @@ void FeatureTracker::drawTrackbox(const darknet_ros_msgs::BoundingBoxesConstPtr 
     // int rows = imLeft.rows;
     int cols = imLeft.cols;
     if (!imRight.empty() && (stereo_cam))
-        cv::hconcat(imLeft, imRight, imTrack); // 拼接函数
+        cv::hconcat(imLeft, imRight, imTrack); //拼接函数
     else
         imTrack = imLeft.clone();
     cv::cvtColor(imTrack, imTrack, CV_GRAY2RGB);
@@ -923,7 +923,7 @@ void FeatureTracker::drawTrackbox(const darknet_ros_msgs::BoundingBoxesConstPtr 
         double len = std::min(1.0, 1.0 * track_cnt[j] / 20);
         cv::circle(imTrack, curLeftPts[j], 2, cv::Scalar(255 * (1 - len), 0, 255 * len), 6); // point  渐变点len越小，颜色越蓝，点的质量越差
     }
-    if (!imRight.empty() && (stereo_cam)) // 双目就把两者联系起来
+    if (!imRight.empty() && (stereo_cam)) //双目就把两者联系起来
     {
         for (size_t i = 0; i < curRightPts.size(); i++)
         {

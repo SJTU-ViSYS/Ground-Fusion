@@ -17,8 +17,6 @@
 #include <execinfo.h>
 #include <csignal>
 #include <opencv2/opencv.hpp>
-#include <opencv2/imgproc/imgproc_c.h>
-#include <opencv2/imgproc/types_c.h>
 #include <eigen3/Eigen/Dense>
 
 #include "camodocal/camera_models/CameraFactory.h"

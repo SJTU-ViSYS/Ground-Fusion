@@ -40,6 +40,7 @@ queue<std::vector<ObsPtr>> gnss_meas_buf;
 queue<darknet_ros_msgs::BoundingBoxesConstPtr> boxes_buf;
 std::mutex m_buf;
 
+// new
 vector<Vector4d> vio_xyzt_buf;
 vector<Vector4d> wheel_xyzt_buf;
 vector<Vector3d> vio_xyz_buf;
@@ -75,6 +76,10 @@ void box_callback(const darknet_ros_msgs::BoundingBoxesConstPtr &boxes_msg)
 {
     m_buf.lock();
     boxes_buf.push(boxes_msg);
+    // cout<<"boxes size:"<<boxes_buf.size()<<endl<<endl;
+    // cout << "boxes image header:" << std::setprecision(19) << boxes_msg->image_header.stamp.toSec() << endl
+    //      << endl
+    //      << endl;
 
     m_buf.unlock();
 }
