@@ -77,7 +77,7 @@ After install all 3rd parties：
 mkdir -p ~/Groundfusion_ws/src
 cd ~/Groundfusion_ws/src
 git clone https://github.com/HKUST-Aerial-Robotics/gnss_comm
-git clone https://github.com/SJTU-ViSYS/Ground-Fusion
+git clone -b ubuntu18_version https://github.com/SJTU-ViSYS/Ground-Fusion
 cd ../..
 catkin_make -j12
 ~~~
