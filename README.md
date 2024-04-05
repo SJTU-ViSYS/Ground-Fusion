@@ -34,7 +34,7 @@ Tested on Ubuntu 18.04 (with ROS Melodic and OpenCV3) and on Ubuntu 20.04(with R
 This package requires [OpenCV 3/4](https://github.com/opencv/opencv) and some features of C++11. 
 
 ### 1.3 Eigen, Ceres, and PCL
-This package requires [Eigen 3.3.7](), [Ceres 1.14](https://ceres-solver.googlesource.com/ceres-solver),[Sophus](https://github.com/strasdat/Sophus.git ) and [PCL 1.10 or 1.11](https://github.com/PointCloudLibrary/pcl).
+This package requires [Eigen 3.3.7](https://github.com/PX4/eigen), [Ceres 1.14](https://ceres-solver.googlesource.com/ceres-solver),[Sophus](https://github.com/strasdat/Sophus.git ) and [PCL 1.10 or 1.11](https://github.com/PointCloudLibrary/pcl).
 You need to download they in your thirdparty folder, and then:
 ~~~
 sudo apt-get update
