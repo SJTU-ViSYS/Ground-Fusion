@@ -96,7 +96,7 @@ Download at [Ground-challenge](https://github.com/sjtuyinjie/Ground-Challenge) a
 ~~~
 # [launch] open a terminal and type:
 source devel/setup.bash
-roslaunch vins groundfusion.launch\
+roslaunch vins groundfusion.launch
 
 # [run localization] open another terminal:
 source devel/setup.bash
