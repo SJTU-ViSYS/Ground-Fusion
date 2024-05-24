@@ -1,8 +1,8 @@
 # Ground-Fusion: A Low-cost Ground SLAM System Robust to Corner Cases (ICRA2024)
-## Project Author: [Jie Yin](https://github.com/sjtuyinjie?tab=repositories) at (1195391308@qq.com)
+## Project Author: [Jie Yin](https://github.com/sjtuyinjie?tab=repositories) (1195391308@qq.com)
 
 ## NOTICE
-### We warmly welcome and highly recommend the integration of the Ground-Fusion system into your projects for several compelling reasons::
+### We warmly welcome and highly recommend the integration of the Ground-Fusion system into your projects for several compelling reasons:
 
 1. Comprehensive Sensor Suite: The Ground-Fusion system is equipped with a multitude of sensors (RGBD-IMU-Wheel-GNSS), facilitating an easy onset for enhancements to any module. This richness in sensory input streamlines the process of adapting and refining components within the system.
 
