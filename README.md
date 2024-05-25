@@ -109,8 +109,8 @@ rosrun dense_map dense_map_node src/Ground-Fusion/config/realsense/groundchallen
 ~~~
 
 
-### 2.2 M2DGR-P dataset
-Download at [M2DGR-P](https://github.com/sjtuyinjie/M2DGR-plus) and give a star.
+### 2.2 M2DGR-Plus dataset
+Download at [M2DGR-Plus](https://github.com/sjtuyinjie/M2DGR-plus) and give a star.
 
 
 ~~~
