@@ -92,7 +92,7 @@ catkin_make -j12
 
 
 ### 2.1 Ground-challenge dataset
-Download at [Ground-challenge](https://github.com/sjtuyinjie/Ground-Challenge) and give a star.
+Download [Ground-challenge](https://github.com/sjtuyinjie/Ground-Challenge) dataset and give a star.
 
 ~~~
 # [launch] open a terminal and type:
@@ -110,7 +110,7 @@ rosrun dense_map dense_map_node src/Ground-Fusion/config/realsense/groundchallen
 
 
 ### 2.2 M2DGR-Plus dataset
-Download at [M2DGR-Plus](https://github.com/sjtuyinjie/M2DGR-plus) and give a star.
+Download [M2DGR-Plus](https://github.com/sjtuyinjie/M2DGR-plus) dataset and give a star.
 
 
 ~~~
