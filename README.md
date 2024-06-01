@@ -10,7 +10,7 @@ Check out the [**presentation video above**](https://www.bilibili.com/video/BV1x
 
 1. **🔥Comprehensive Sensor Suite**: The Ground-Fusion system is equipped with a multitude of sensors (RGBD-IMU-Wheel-GNSS), facilitating an easy onset for enhancements to any module. This richness in sensory input streamlines the process of adapting and refining components within the system.
 
-2. **⭐️Open-Source Ecosystem**: Both the Ground-Fusion algorithm and associated datasets such as [**M2DGR-plus**](https://github.com/sjtuyinjie/M2DGR-plus) and the [**Ground-Challenge**](https://github.com/sjtuyinjie/Ground-Challenge) are openly available, fostering a comprehensive and transparent benchmarking environment.
+2. **⭐️Open-Source Ecosystem**: Both the Ground-Fusion algorithm and associated datasets such as [**M2DGR-plus**](https://github.com/SJTU-ViSYS/M2DGR-plus) and the [**Ground-Challenge**](https://github.com/sjtuyinjie/Ground-Challenge) are openly available, fostering a comprehensive and transparent benchmarking environment.
 
 3. **🚀Proven Performance**: The Ground-Fusion algorithm has been rigorously validated across diverse datasets, establishing itself as SOTA in lidar-less SLAM algorithms. Outperforming Ground-Fusion on these benchmarks would significantly bolster the credibility of your proposed method.
 
@@ -23,7 +23,7 @@ Check out the [**presentation video above**](https://www.bilibili.com/video/BV1x
 We introduce Ground-Fusion, a low-cost sensor fusion simultaneous localization and mapping (SLAM) system for ground vehicles. Our system features efficient initialization, effective sensor anomaly detection and handling, real-time dense color mapping, and robust localization in diverse environments. We tightly integrate RGB-D images, inertial measurements, wheel odometer and GNSS signals within a factor graph to achieve accurate and reliable localization both indoors and outdoors. To ensure successful initialization, we propose an efficient strategy that comprises three different methods: stationary, visual, and dynamic, tailored to handle diverse cases. Furthermore, we develop mechanisms to detect sensor anomalies and degradation, handling them adeptly to maintain system accuracy. 
 
 The preprint version of paper is [here](http://arxiv.org/abs/2402.14308).
-The dataset is at [https://github.com/SJTU-ViSYS/M2DGR-plus](https://github.com/SJTU-ViSYS/M2DGR-plus) and [https://github.com/SJTU-ViSYS/M2DGR](https://github.com/SJTU-ViSYS/M2DGR).
+The dataset is at [**M2DGR-plus**](https://github.com/SJTU-ViSYS/M2DGR-plus), [**Ground-Challenge**](https://github.com/sjtuyinjie/Ground-Challenge) and [**M2DGR**](https://github.com/SJTU-ViSYS/M2DGR).
 
 
 <div align=center>
