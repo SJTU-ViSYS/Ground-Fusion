@@ -1,6 +1,10 @@
 # Ground-Fusion: A Low-cost Ground SLAM System Robust to Corner Cases (ICRA2024)
 ## Project Author: [Jie Yin](https://github.com/sjtuyinjie?tab=repositories) (1195391308@qq.com)
 
+[![ICRA2024 Presentation](cover.jpg)](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7)
+
+Check out the presentation video above for a quick overview of this work!
+
 ## NOTICE
 ### We warmly welcome and highly recommend the integration of the Ground-Fusion system into your projects for several compelling reasons:
 
@@ -13,7 +17,7 @@
 
 
 ## Introduction
-[![ICRA2024 Presentation](cover.jpg)](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7)
+
 
 
 We introduce Ground-Fusion, a low-cost sensor fusion simultaneous localization and mapping (SLAM) system for ground vehicles. Our system features efficient initialization, effective sensor anomaly detection and handling, real-time dense color mapping, and robust localization in diverse environments. We tightly integrate RGB-D images, inertial measurements, wheel odometer and GNSS signals within a factor graph to achieve accurate and reliable localization both indoors and outdoors. To ensure successful initialization, we propose an efficient strategy that comprises three different methods: stationary, visual, and dynamic, tailored to handle diverse cases. Furthermore, we develop mechanisms to detect sensor anomalies and degradation, handling them adeptly to maintain system accuracy. 
