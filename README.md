@@ -112,6 +112,9 @@ rosrun vins vins_node src/Ground-Fusion/config/realsense/groundchallenge.yaml
 # [dense map]open third terminal:
 source devel/setup.bash
 rosrun dense_map dense_map_node src/Ground-Fusion/config/realsense/groundchallenge.yaml
+
+# [play rosbag]open forth terminal:
+rosbag play office3.bag
 ~~~
 
 
@@ -131,6 +134,11 @@ rosrun vins vins_node src/Ground-Fusion/config/realsense/m2dgrp.yaml
 # [dense map]open third terminal:
 source devel/setup.bash
 rosrun dense_map dense_map_node src/Ground-Fusion/config/realsense/m2dgrp.yaml
+
+# [play rosbag]open forth terminal:
+rosbag play anamoly.bag
+
+
 ~~~
 
 
