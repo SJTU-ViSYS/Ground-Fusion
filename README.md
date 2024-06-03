@@ -6,7 +6,7 @@ First Author: [**Jie Yin 殷杰**](https://github.com/sjtuyinjie?tab=repositorie
 &emsp;
 ➡️ [[Dataset]](https://github.com/SJTU-ViSYS/M2DGR-plus)
 &emsp;
-⭐️[[Presentation Video]](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7)
+⭐️ [[Presentation Video]](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7)
 
 
 [![ICRA2024 Presentation](cover.jpg)](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7)
