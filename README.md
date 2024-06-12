@@ -11,7 +11,8 @@ First Author: [**Jie Yin 殷杰**](https://github.com/sjtuyinjie?tab=repositorie
 
 [![ICRA2024 Presentation](cover.jpg)](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7)
 
-### 🎯 Check out the [**presentation video above**](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7) for a quick overview of this work!
+> [!TIP]
+> Check out the [**presentation video above**](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7) for a quick overview of this work!
 
 ## NOTICE
 ### We warmly welcome and highly recommend the integration of the Ground-Fusion system into your projects for several compelling reasons:
