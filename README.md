@@ -126,6 +126,11 @@ rosrun dense_map dense_map_node src/Ground-Fusion/config/realsense/groundchallen
 rosbag play office3.bag
 ~~~
 
+> [!TIP]
+> The dense mapping node may consume computing resources, affecting the real-time performance of the entire system. So it's suggested that do not run this node unless necessary. We are working on optimizing the mapping node currently.
+
+
+
 
 ### 2.2 M2DGR-Plus dataset
 Download [M2DGR-Plus](https://github.com/sjtuyinjie/M2DGR-plus) dataset and give a star.
@@ -150,6 +155,8 @@ rosbag play anamoly.bag
 
 ~~~
 
+> [!NOTE]
+> On M2DGR-plus, Ground-Fusion performs better without GNSS measurements due to low frequency of GNSS (1Hz) of M2DGR-plus dataset. Welcome to test Ground-Fusion on other datasets suporting RGBD-IMU-Wheel-GNSS settings. Furthermore, we are currently developing a more advanced version of Ground-Fusion, please follow us.
 
 
 
