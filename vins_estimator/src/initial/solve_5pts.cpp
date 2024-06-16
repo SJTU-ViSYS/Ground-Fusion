@@ -10,8 +10,8 @@
  *******************************************************/
 
 #include "solve_5pts.h"
-#include <sophus/se3.h>
-#include <sophus/so3.h>
+#include <sophus/se3.hpp>
+#include <sophus/so3.hpp>
 using Sophus::SE3;
 using Sophus::SO3;
 
@@ -241,40 +241,47 @@ bool MotionEstimator::solveRelativeRT(const vector<pair<Vector3d, Vector3d>> &co
     return false;
 }
 
-bool MotionEstimator::solveRelativeRT_PNP(const vector<pair<Vector3d, Vector3d>> &corres, Matrix3d &Rotation, Vector3d &Translation)
+bool MotionEstimator::solveRelativeRT_PNP(const vector<pair<Vector3d, Vector3d>>& corres, Matrix3d& Rotation, Vector3d& Translation)
 {
     vector<cv::Point3f> lll;
     vector<cv::Point2f> rr;
-    for (int i = 0;  i< int(corres.size()); i++)
+
+    for (int i = 0; i < int(corres.size()); i++)
     {
-        if (corres[i].first(2) >0 && corres[i].second(2) >0 ) {
+        if (corres[i].first(2) > 0 && corres[i].second(2) > 0)
+        {
             lll.push_back(cv::Point3f(corres[i].first(0), corres[i].first(1), corres[i].first(2)));
             rr.push_back(cv::Point2f(corres[i].second(0) / corres[i].second(2),
                                      corres[i].second(1) / corres[i].second(2)));
         }
     }
-    cv::Mat rvec,tvec,inliersArr;
+
+    cv::Mat rvec, tvec, inliersArr;
     cv::Mat cameraMatrix = (cv::Mat_<double>(3, 3) << 1, 0, 0, 0, 1, 0, 0, 0, 1);
 
-    cv::solvePnPRansac(lll, rr, cameraMatrix, cv::Mat(), rvec, tvec, false, 100, 1.0/460, 0.99,
-                       inliersArr, cv::SOLVEPNP_ITERATIVE);//maybe don't need 100times
+    cv::solvePnPRansac(lll, rr, cameraMatrix, cv::Mat(), rvec, tvec, false, 100, 1.0 / 460, 0.99,
+                       inliersArr, cv::SOLVEPNP_ITERATIVE);
 
+    Vector3d rvec_eigen(rvec.at<double>(0, 0), rvec.at<double>(1, 0), rvec.at<double>(2, 0));
+    Matrix3d rota = Sophus::SO3d::exp(rvec_eigen).matrix();
 
     Vector3d tran(tvec.at<double>(0, 0), tvec.at<double>(1, 0), tvec.at<double>(2, 0));
-    Matrix3d rota = SO3(rvec.at<double>(0, 0), rvec.at<double>(1, 0), rvec.at<double>(2, 0)).matrix();
 
+    Rotation = rota.transpose();
+    Translation = -rota.transpose() * tran;
 
     ROS_DEBUG_STREAM("-----------pnp-----------");
     ROS_DEBUG_STREAM(lll.size());
     ROS_DEBUG_STREAM(inliersArr.rows);
 
-    Rotation = rota.transpose();
-    Translation = -rota.transpose() * tran;
+    ROS_DEBUG_STREAM("Rotation:");
+    ROS_DEBUG_STREAM(Rotation);
+    ROS_DEBUG_STREAM("Translation:");
+    ROS_DEBUG_STREAM(Translation);
 
-	ROS_DEBUG_STREAM(Rotation);
-	ROS_DEBUG_STREAM(Translation);
     return true;
 }
+
 
 
 

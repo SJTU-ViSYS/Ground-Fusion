@@ -321,10 +321,10 @@ add_library(vins_lib
   src/factor/pose_anchor_factor.cpp
   src/initial/gnss_vi_initializer.cpp
 )
-target_link_libraries(vins_lib ${catkin_LIBRARIES} ${OpenCV_LIBS} ${CERES_LIBRARIES} /usr/local/lib/libSophus.so fmt)
+target_link_libraries(vins_lib ${catkin_LIBRARIES} ${OpenCV_LIBS} ${CERES_LIBRARIES} ${SOPHUS_LIB} fmt)
 
 add_executable(vins_node src/rosNodeTest.cpp)
-target_link_libraries(vins_node vins_lib /usr/local/lib/libSophus.so
+target_link_libraries(vins_node vins_lib ${SOPHUS_LIB}
   ${CMAKE_CURRENT_SOURCE_DIR}/src/linefeatureTracker/line_descriptor/lib/liblinedesc.so
 )
 

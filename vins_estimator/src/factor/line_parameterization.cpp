@@ -3,8 +3,8 @@
 // #include "line_geometry.h"
 // #include "../sophus/so3.hpp"
 
-#include <sophus/se3.h>
-#include <sophus/so3.h>
+#include <sophus/se3.hpp>
+#include <sophus/so3.hpp>
 using Sophus::SE3;
 using Sophus::SO3;
 bool LineOrthParameterization::Plus(const double *x, const double *delta, double *x_plus_delta) const
