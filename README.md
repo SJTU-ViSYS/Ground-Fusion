@@ -100,6 +100,9 @@ cd ../..
 catkin_make -j12
 ~~~
 
+> [!TIP]
+> If you have problems with Sophus version, try to build and install both template version and non-template version to make sure it works.
+
 
 
 
