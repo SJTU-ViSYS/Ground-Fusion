@@ -19,7 +19,7 @@ First Author: [**Jie Yin 殷杰**](https://github.com/sjtuyinjie?tab=repositorie
 
 1. **🔥Comprehensive Sensor Suite**: The Ground-Fusion system is equipped with a multitude of sensors (RGBD-IMU-Wheel-GNSS), facilitating an easy onset for enhancements to any module. This richness in sensory input streamlines the process of adapting and refining components within the system.
 
-2. **⭐️Open-Source Ecosystem**: Both the Ground-Fusion algorithm and associated datasets such as [**M2DGR-plus**](https://github.com/SJTU-ViSYS/M2DGR-plus) and the [**Ground-Challenge**](https://github.com/sjtuyinjie/Ground-Challenge) are openly available, fostering a comprehensive and transparent benchmarking environment.
+2. **⭐️Open-Source Ecosystem**: Both the Ground-Fusion algorithm and associated datasets such as [**M2DGR-plus**](https://github.com/SJTU-ViSYS/M2DGR-plus) and the [**Ground-Challenge**](https://github.com/sjtuyinjie/Ground-Challenge) are openly available, forming a comprehensive bechmark suite. Welcome to beat Ground-Fusion on M2DGR and Ground-Challenge!
 
 3. **🚀Proven Performance**: The Ground-Fusion algorithm has been rigorously validated across diverse datasets, establishing itself as SOTA in lidar-less SLAM algorithms. Outperforming Ground-Fusion on these benchmarks would significantly bolster the credibility of your proposed method.
 
