@@ -1,6 +1,6 @@
 # Ground-Fusion: A Low-cost Ground SLAM System Robust to Corner Cases (ICRA2024)
 
-First Author: [**Jie Yin 殷杰**](https://github.com/sjtuyinjie?tab=repositories)
+First Author: [**Jie Yin 殷杰**](https://github.com/sjtuyinjie)
 &emsp;
 📝 [[Paper]](https://arxiv.org/abs/2402.14308)
 &emsp;
