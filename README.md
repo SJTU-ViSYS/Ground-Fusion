@@ -8,7 +8,7 @@ First Author: [**Jie Yin 殷杰**](https://sjtuyinjie.github.io/)
 &emsp;
 ⭐️ [[Presentation Video]](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7)
 &emsp;
-🔥[[Wechat Article]](https://mp.weixin.qq.com/s/CfnfxHvn9pbYc4599_JoSg)
+🔥[[News]](https://mp.weixin.qq.com/s/CfnfxHvn9pbYc4599_JoSg)
 
 [![ICRA2024 Presentation](cover.jpg)](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7)
 
