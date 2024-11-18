@@ -1,5 +1,7 @@
 # Ground-Fusion: A Low-cost Ground SLAM System Robust to Corner Cases (ICRA2024)
 
+<div align="center">
+
 First Author: [**Jie Yin 殷杰**](https://sjtuyinjie.github.io/)
 &emsp;
 📝 [[Paper]](https://arxiv.org/abs/2402.14308)
@@ -10,7 +12,17 @@ First Author: [**Jie Yin 殷杰**](https://sjtuyinjie.github.io/)
 &emsp;
 🔥[[News]](https://mp.weixin.qq.com/s/CfnfxHvn9pbYc4599_JoSg)
 
+[![Author](https://img.shields.io/badge/Author-Jie%20Yin-blue)](https://sjtuyinjie.github.io/)
+[![Paper](https://img.shields.io/badge/Paper-GroundFusion-yellow)](https://arxiv.org/abs/2112.13659/)
+[![Dataset](https://img.shields.io/badge/Dataset-M2DGR+%2B-green)](https://github.com/SJTU-ViSYS/M2DGR-plus)
+[![Video](https://img.shields.io/badge/Video-red)](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7)
+[![News](https://img.shields.io/badge/News-orange)](https://mp.weixin.qq.com/s/CfnfxHvn9pbYc4599_JoSg)
+
+</div>
+
 [![ICRA2024 Presentation](cover.jpg)](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7)
+
+
 
 > [!TIP]
 > Check out the [**presentation video above**](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7) for a quick overview of this work!
