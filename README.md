@@ -16,6 +16,7 @@ First Author: [**Jie Yin 殷杰**](https://sjtuyinjie.github.io/)
 [![Paper](https://img.shields.io/badge/Paper-GroundFusion-yellow)](https://ieeexplore.ieee.org/document/10610070)
 [![Preprint](https://img.shields.io/badge/Ppreprint-Arxiv-purple)](https://arxiv.org/abs/2112.13659/)
 [![Dataset](https://img.shields.io/badge/Dataset-M2DGR+%2B-green)](https://github.com/SJTU-ViSYS/M2DGR-plus)
+[![License](https://img.shields.io/badge/License-GPL3.0-cyan)]()
 [![Video](https://img.shields.io/badge/Video-red)](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7)
 [![News](https://img.shields.io/badge/News-orange)](https://mp.weixin.qq.com/s/CfnfxHvn9pbYc4599_JoSg)
 
