@@ -4,7 +4,7 @@
 
 First Author: [**Jie Yin 殷杰**](https://sjtuyinjie.github.io/)
 &emsp;
-📝 [[Paper]](https://arxiv.org/abs/2402.14308)
+📝 [[Paper]](https://ieeexplore.ieee.org/document/10610070) / [[Arxiv]](https://arxiv.org/abs/2402.14308)
 &emsp;
 ➡️ [[Dataset]](https://github.com/SJTU-ViSYS/M2DGR-plus)
 &emsp;
