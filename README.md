@@ -173,8 +173,10 @@ rosbag play anamoly.bag
 
 ~~~
 
-> [!NOTE]
-> On M2DGR-plus, Ground-Fusion performs better without GNSS measurements due to low frequency of GNSS (1Hz) of M2DGR-plus dataset. Welcome to test Ground-Fusion on other datasets suporting RGBD-IMU-Wheel-GNSS settings. Furthermore, we are currently developing a more advanced version of Ground-Fusion, please follow us.
+> [!Know Issues]
+> On M2DGR-plus, Ground-Fusion performs even better without GNSS measurements due to low frequency of GNSS (1Hz) of M2DGR-plus dataset. Welcome to test Ground-Fusion on other datasets suporting RGBD-IMU-Wheel-GNSS settings.
+>  The threshold of diffenrent initilization methods need to be adjusted in case that Ground-Fusion faces a drift in some sequences during the initialization phase.
+> Furthermore, we are currently developing a more advanced version of Ground-Fusion, please follow us.
 
 
 
