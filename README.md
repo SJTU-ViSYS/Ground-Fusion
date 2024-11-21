@@ -205,7 +205,7 @@ If you use this work in an academic work, please cite:
   year={2023},
   organization={IEEE}
 }
-@INPROCEEDINGS{10610070,
+@INPROCEEDINGS{yin2024ground,
   author={Yin, Jie and Li, Ang and Xi, Wei and Yu, Wenxian and Zou, Danping},
   booktitle={2024 IEEE International Conference on Robotics and Automation (ICRA)}, 
   title={Ground-Fusion: A Low-cost Ground SLAM System Robust to Corner Cases}, 
