@@ -20,6 +20,11 @@ First Author: [**Jie Yin 殷杰**](https://sjtuyinjie.github.io/)
 [![Video](https://img.shields.io/badge/Video-red)](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7)
 [![News](https://img.shields.io/badge/News-orange)](https://mp.weixin.qq.com/s/CfnfxHvn9pbYc4599_JoSg)
 
+[![stars](https://img.shields.io/github/stars/SJTU-ViSYS/Ground-Fusion.svg)](https://github.com/SJTU-ViSYS/Ground-Fusion)
+[![forks](https://img.shields.io/github/forks/SJTU-ViSYS/Ground-Fusion.svg)](https://github.com/SJTU-ViSYS/Ground-Fusion)
+[![open issues](https://img.shields.io/github/issues-raw/SJTU-ViSYS/Ground-Fusion)](https://github.com/SJTU-ViSYS/Ground-Fusion/issues)
+[![issue resolution](https://img.shields.io/github/issues-closed-raw/SJTU-ViSYS/Ground-Fusion)](https://github.com/SJTU-ViSYS/Ground-Fusion/issues)
+
 </div>
 
 [![ICRA2024 Presentation](cover.jpg)](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7)
