@@ -1,4 +1,4 @@
-# Ground-Fusion: A Low-cost Ground SLAM System Robust to Corner Cases [ICRA2024]
+# [ICRA2024]Ground-Fusion: A Low-cost Ground SLAM System Robust to Corner Cases 
 
 <div align="center">
 
