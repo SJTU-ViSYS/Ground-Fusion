@@ -212,16 +212,14 @@ If you use this work in an academic work, please cite:
   year={2023},
   organization={IEEE}
 }
-@INPROCEEDINGS{yin2024ground,
+@inproceedings{yin2024ground,
+  title={Ground-fusion: A low-cost ground slam system robust to corner cases},
   author={Yin, Jie and Li, Ang and Xi, Wei and Yu, Wenxian and Zou, Danping},
-  booktitle={2024 IEEE International Conference on Robotics and Automation (ICRA)}, 
-  title={Ground-Fusion: A Low-cost Ground SLAM System Robust to Corner Cases}, 
+  booktitle={2024 IEEE International Conference on Robotics and Automation (ICRA)},
+  pages={8603--8609},
   year={2024},
-  volume={},
-  number={},
-  pages={8603-8609},
-  keywords={Location awareness;Visualization;Simultaneous localization and mapping;Accuracy;Wheels;Sensor fusion;Land vehicles},
-  doi={10.1109/ICRA57147.2024.10610070}}
+  organization={IEEE}
+}
 ~~~
 
 ## Star History
