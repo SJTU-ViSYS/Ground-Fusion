@@ -194,6 +194,14 @@ The source code of Ground-Fusion is released under GPLv3 license. **Do not use t
 
 If you use this work in an academic work, please cite:
 ~~~
+@inproceedings{yin2024ground,
+  title={Ground-fusion: A low-cost ground slam system robust to corner cases},
+  author={Yin, Jie and Li, Ang and Xi, Wei and Yu, Wenxian and Zou, Danping},
+  booktitle={2024 IEEE International Conference on Robotics and Automation (ICRA)},
+  pages={8603--8609},
+  year={2024},
+  organization={IEEE}
+}
 @article{yin2021m2dgr,
   title={M2dgr: A multi-sensor and multi-scenario slam dataset for ground robots},
   author={Yin, Jie and Li, Ang and Li, Tao and Yu, Wenxian and Zou, Danping},
@@ -212,14 +220,7 @@ If you use this work in an academic work, please cite:
   year={2023},
   organization={IEEE}
 }
-@inproceedings{yin2024ground,
-  title={Ground-fusion: A low-cost ground slam system robust to corner cases},
-  author={Yin, Jie and Li, Ang and Xi, Wei and Yu, Wenxian and Zou, Danping},
-  booktitle={2024 IEEE International Conference on Robotics and Automation (ICRA)},
-  pages={8603--8609},
-  year={2024},
-  organization={IEEE}
-}
+
 ~~~
 
 ## Star History
