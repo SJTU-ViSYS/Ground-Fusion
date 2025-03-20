@@ -150,7 +150,7 @@ rosbag play office3.bag
 ~~~
 
 > [!TIP]
-> We are delighted to see that many users enjoy our M2DGR dataset. However, **due to an overwhelming number of download requests, OneDrive has become unstable. If you encounter any issues, please wait for about 10 minutes and try again.**
+> The dense mapping node may consume computing resources, affecting the real-time performance of the entire system. So it's suggested that do not run this node unless necessary. We are working on optimizing the mapping node currently
 
 
 
