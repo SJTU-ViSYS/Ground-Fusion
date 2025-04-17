@@ -62,9 +62,12 @@ The dataset is at [**M2DGR-plus**](https://github.com/SJTU-ViSYS/M2DGR-plus), [*
 <p align="center">Figure 1. We categorize corner cases into three types: visual,
 wheel, and GNSS challenges.</p>
 
-## 1. Prerequisites and Installation
-### 1.1 Ubuntu and ROS
-Tested on Ubuntu 18.04 (with ROS Melodic and OpenCV3) and on Ubuntu 20.04(with ROS Noetic and OpenCV4).
+## ⚙️ 1. Prerequisites & Installation
+
+### 1.1 OS & ROS Support  
+✅ Ubuntu 18.04 + ROS Melodic + OpenCV3  
+✅ Ubuntu 20.04 + ROS Noetic + OpenCV4
+
 
 ### 1.2 OpenCV
 This package requires [OpenCV 3/4](https://github.com/opencv/opencv) and some features of C++11. 
@@ -120,13 +123,13 @@ cd ../..
 catkin_make -j12
 ~~~
 
-> [!TIP]
-> If you have problems with Sophus version, try to build and install both template version and non-template version to make sure it works.
+> 💡 Tip: If you encounter `Sophus` issues, try building both template and non-template versions.
 
 
 
 
-## 2. Run examples
+
+## 🚀 2. Run Examples
 
 
 ### 2.1 Ground-challenge dataset
@@ -149,8 +152,7 @@ rosrun dense_map dense_map_node src/Ground-Fusion/config/realsense/groundchallen
 rosbag play office3.bag
 ~~~
 
-> [!TIP]
-> The dense mapping node may consume computing resources, affecting the real-time performance of the entire system. So it's suggested that do not run this node unless necessary. We are working on optimizing the mapping node currently
+> ⚠️ Mapping node is resource-intensive, affecting the real-time performance of the entire system. So it's suggested that do not run this node unless necessary. We are working on optimizing the mapping node currently
 
 
 
@@ -178,22 +180,29 @@ rosbag play anamoly.bag
 
 ~~~
 
-> [!Know Issues]
-> On M2DGR-plus, Ground-Fusion performs even better without GNSS measurements due to low frequency of GNSS (1Hz) of M2DGR-plus dataset. Welcome to test Ground-Fusion on other datasets suporting RGBD-IMU-Wheel-GNSS settings.
->  The threshold of diffenrent initilization methods need to be adjusted in case that Ground-Fusion faces a drift in some sequences during the initialization phase.
-> Furthermore, we are currently developing a more advanced version of Ground-Fusion, please follow us.
 
+> ⚠️ **Known Issues**:  
+> - Ground-Fusion may perform better *without GNSS* on M2DGR-Plus due to its low (1Hz) GNSS frequency.  
+> - Initialization thresholds may need tuning to avoid early-phase drift.  
+> - A more advanced version of Ground-Fusion is under development — stay tuned!
 
+---
 
+## 🙏 3.Acknowledgements
 
-## 3. Acknowledgement
-Thanks support from National Key R&D Program (2022YFB3903802), NSFC(62073214), and Midea Group. This project is based on [GVINS](https://github.com/HKUST-Aerial-Robotics/GVINS), and has borrowed some codes from open-source projects [VIW-Fusion](https://github.com/TouchDeeper/VIW-Fusion) and [VINS-RGBD](https://github.com/STAR-Center/VINS-RGBD), thanks for your great contribution!
+This work is supported by:
 
-## 4. License
-The source code of Ground-Fusion is released under GPLv3 license. **Do not use this project for any commercial purpose unless permitted by authors. Yin Jie is still working on improving the system. For any technical issues, please contact him at <robot_yinjie@outlook.com>.**
+- National Key R&D Program (2022YFB3903802)  
+- NSFC (62073214)  
+- Midea Group
 
-If you use this work in an academic work, please cite:
-~~~
+> This project is built on [GVINS](https://github.com/HKUST-Aerial-Robotics/GVINS), with inspirations from [VIW-Fusion](https://github.com/TouchDeeper/VIW-Fusion) and [VINS-RGBD](https://github.com/STAR-Center/VINS-RGBD) — huge thanks!
+
+---
+
+## 📄 4. Citation
+
+```bibtex
 @inproceedings{yin2024ground,
   title={Ground-fusion: A low-cost ground slam system robust to corner cases},
   author={Yin, Jie and Li, Ang and Xi, Wei and Yu, Wenxian and Zou, Danping},
@@ -220,11 +229,11 @@ If you use this work in an academic work, please cite:
   year={2023},
   organization={IEEE}
 }
+```
 
-~~~
-
-## Star History
+## ⭐️ 5. Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=SJTU-ViSYS/Ground-Fusion&type=Timeline)](https://star-history.com/#Ashutosh00710/github-readme-activity-graph&Timeline)
+
 
 
