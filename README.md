@@ -34,6 +34,10 @@ First Author: [**Jie Yin 殷杰**](https://sjtuyinjie.github.io/)
 > [!TIP]
 > Check out the [**presentation video above**](https://www.bilibili.com/video/BV1xx421m75k/?spm_id_from=333.337.search-card.all.click&vd_source=0804300aea4065df90adde5398ee74b7) for a quick overview of this work!
 
+## News 
+- **🔥`2025/06/16`**: Introducing our new paper on IROS2025:"Towards Robust Sensor-Fusion Ground SLAM: A Comprehensive Benchmark and A Resilient Framework" is accepted to IROS2025!. code: **[Ground-Fusion++](https://github.com/sjtuyinjie/Ground-Fusion2)**, dataset: **[M3DGR](https://github.com/sjtuyinjie/M3DGR)**! 
+
+
 ## NOTICE
 ### We warmly welcome and highly recommend the integration of the Ground-Fusion system into your projects for several compelling reasons:
 
@@ -42,6 +46,7 @@ First Author: [**Jie Yin 殷杰**](https://sjtuyinjie.github.io/)
 2. **⭐️Open-Source Ecosystem**: Both the Ground-Fusion algorithm and associated datasets such as [**M2DGR-plus**](https://github.com/SJTU-ViSYS/M2DGR-plus) and the [**Ground-Challenge**](https://github.com/sjtuyinjie/Ground-Challenge) are openly available, forming a comprehensive bechmark suite. **Welcome to beat Ground-Fusion on M2DGR and Ground-Challenge!**
 
 3. **🚀Proven Performance**: The Ground-Fusion algorithm has been rigorously validated across diverse datasets, establishing itself as SOTA in lidar-less SLAM algorithms. Outperforming Ground-Fusion on these benchmarks would significantly bolster the credibility of your proposed method.
+
 
 
 
