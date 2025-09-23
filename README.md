@@ -205,6 +205,18 @@ This work is supported by:
 
 ---
 
+
+Thanks to everyone for supporting this project.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://reporoster.com/stars/dark/SJTU-ViSYS/Ground-Fusion" />
+  <source media="(prefers-color-scheme: light)" srcset="https://reporoster.com/stars/SJTU-ViSYS/Ground-Fusion" />
+  <img alt="github-stargazers" src="https://github.com/SJTU-ViSYS/Ground-Fusion/stargazers" />
+</picture>
+
+<p align="right"><a href="#top">🔝Back to top</a></p>
+
+
 ## 📄 4. Citation
 
 ```bibtex
@@ -215,6 +227,12 @@ This work is supported by:
   pages={8603--8609},
   year={2024},
   organization={IEEE}
+}
+@article{zhang2025towards,
+  title={Towards Robust Sensor-Fusion Ground SLAM: A Comprehensive Benchmark and A Resilient Framework},
+  author={Zhang, Deteng and Zhang, Junjie and Sun, Yan and Li, Tao and Yin, Hao and Xie, Hongzhao and Yin, Jie},
+  journal={arXiv preprint arXiv:2507.08364},
+  year={2025}
 }
 @article{yin2021m2dgr,
   title={M2dgr: A multi-sensor and multi-scenario slam dataset for ground robots},
