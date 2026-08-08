@@ -249,17 +249,4 @@ This work is supported by:
 }
 ```
 
-## ⭐️ 5. Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=SJTU-ViSYS/Ground-Fusion&type=Timeline)](https://star-history.com/#Ashutosh00710/github-readme-activity-graph&Timeline)
-
-
-Thanks to everyone for star this project.
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://reporoster.com/stars/dark/SJTU-ViSYS/Ground-Fusion" />
-  <source media="(prefers-color-scheme: light)" srcset="https://reporoster.com/stars/SJTU-ViSYS/Ground-Fusion" />
-  <img alt="github-stargazers" src="https://github.com/SJTU-ViSYS/Ground-Fusion/stargazers" />
-</picture>
-
-<p align="right"><a href="#top">🔝Back to top</a></p>
