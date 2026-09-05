@@ -249,4 +249,6 @@ This work is supported by:
 }
 ```
 
+## 5. Star History
 
+[![Star History Chart](https://api.star-history.com/svg?repos=SJTU-ViSYS/Ground-Fusion&type=Timeline)](https://star-history.dera.page/#SJTU-ViSYS/Ground-Fusion&Timeline)
